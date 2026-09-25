@@ -765,13 +765,13 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label for="recipeName">Nama Menu / Produk</label>
-                        <input type="text" id="recipeName" value="Dimsum Ayam Udang" placeholder="Contoh: Brownies Panggang 20x20">
+                        <input type="text" id="recipeName" value="Dimsum Ayam Udang" maxlength="80" placeholder="Contoh: Brownies Panggang 20x20">
                     </div>
                     <div class="form-group" style="flex: 1;">
                         <label for="portionYield">Hasil Jadi Sekali Masak</label>
                         <div class="input-inline">
-                            <input type="number" id="portionYield" value="30" min="1" oninput="calculateAll()" class="num" style="width: 80px;">
-                            <input type="text" id="portionUnit" value="pcs" placeholder="pcs / box / cup" oninput="calculateAll()">
+                            <input type="number" id="portionYield" value="30" min="1" max="999999" oninput="calculateAll()" class="num" style="width: 80px;">
+                            <input type="text" id="portionUnit" value="pcs" maxlength="20" placeholder="pcs / box / cup" oninput="calculateAll()">
                         </div>
                     </div>
                 </div>
@@ -1067,6 +1067,7 @@
         return String(s == null ? '' : s)
             .replace(/&/g, '&amp;')
             .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
     }
@@ -1134,7 +1135,7 @@
             const cost = item.packSize > 0 ? (item.packPrice / item.packSize) * item.recipeQty : 0;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="text" class="ing-name" value="${escHtml(item.name)}" placeholder="Nama bahan"></td>
+                <td><input type="text" class="ing-name" value="${escHtml(item.name)}" maxlength="60" placeholder="Nama bahan"></td>
                 <td><input type="number" class="ing-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()"></td>
                 <td><input type="number" class="ing-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()"></td>
                 <td><input type="number" class="ing-recipe-qty num text-right" value="${escHtml(item.recipeQty)}" min="0" step="any" oninput="calculateAll()"></td>
@@ -1165,7 +1166,7 @@
             const costPerPcs = item.packSize > 0 ? (item.packPrice / item.packSize) : 0;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="text" class="pkg-name" value="${escHtml(item.name)}" placeholder="Nama kemasan"></td>
+                <td><input type="text" class="pkg-name" value="${escHtml(item.name)}" maxlength="60" placeholder="Nama kemasan"></td>
                 <td><input type="number" class="pkg-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()"></td>
                 <td><input type="number" class="pkg-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()"></td>
                 <td class="text-right num pkg-cost">${formatRupiah(costPerPcs)}</td>
@@ -1181,7 +1182,7 @@
         const tbody = document.getElementById('ingredientsBody');
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="text" class="ing-name" placeholder="Nama bahan"></td>
+            <td><input type="text" class="ing-name" maxlength="60" placeholder="Nama bahan"></td>
             <td><input type="number" class="ing-pack-price num text-right" value="0" min="0" oninput="calculateAll()"></td>
             <td><input type="number" class="ing-pack-size num text-right" value="1" min="1" oninput="calculateAll()"></td>
             <td><input type="number" class="ing-recipe-qty num text-right" value="0" min="0" step="any" oninput="calculateAll()"></td>
@@ -1209,7 +1210,7 @@
         const tbody = document.getElementById('packagingBody');
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="text" class="pkg-name" placeholder="Item kemasan"></td>
+            <td><input type="text" class="pkg-name" maxlength="60" placeholder="Item kemasan"></td>
             <td><input type="number" class="pkg-pack-price num text-right" value="0" min="0" oninput="calculateAll()"></td>
             <td><input type="number" class="pkg-pack-size num text-right" value="1" min="1" oninput="calculateAll()"></td>
             <td class="text-right num pkg-cost">Rp 0</td>
@@ -1461,15 +1462,21 @@
             const raw = localStorage.getItem(STORAGE_KEY);
             if (!raw) return null;
             const parsed = JSON.parse(raw);
-            return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+            if (!Array.isArray(parsed)) return null;
+            const valid = parsed.filter(r => r && typeof r === 'object' && r.id);
+            return valid.length > 0 ? valid : null;
         } catch (e) {
             return null;
         }
     }
 
     function saveAllRecipes(recipes) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
-        updateRecipeSelectOptions();
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
+            updateRecipeSelectOptions();
+        } catch (e) {
+            alert('Gagal menyimpan: Memori browser penuh atau akses ditolak.');
+        }
     }
 
     function collectCurrentFormData() {
