@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator HPP & Harga Jual Dapur UMKM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette F&B Warm Artisan */
+            --bg-page: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-subtle: #f1f5f9;
+            --bg-input: #ffffff;
+
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --border-focus: #ea580c;
+
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+
+            --accent-brand: #ea580c;
+            --accent-brand-hover: #c2410c;
+            --accent-soft: #fff7ed;
+            --accent-soft-text: #9a3412;
+
+            --success: #15803d;
+            --success-soft: #f0fdf4;
+            --danger: #b91c1c;
+            --danger-soft: #fef2f2;
+            --danger-hover: #fee2e2;
+
+            --hero-bg: #0f172a;
+            --hero-text: #f8fafc;
+            --hero-muted: #94a3b8;
+
+            --radius-sm: 6px;
+            --radius-base: 10px;
+            --radius-card: 16px;
+
+            --shadow-subtle: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+            --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+            --shadow-panel: 0 12px 28px -4px rgba(15, 23, 42, 0.08);
+        }
+
+        html[data-theme="dark"] {
+            --bg-page: #0b0f17;
+            --bg-surface: #121824;
+            --bg-surface-subtle: #1a2232;
+            --bg-input: #172030;
+
+            --border-color: #243044;
+            --border-hover: #334460;
+            --border-focus: #f97316;
+
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+
+            --accent-brand: #f97316;
+            --accent-brand-hover: #fb923c;
+            --accent-soft: #2e1809;
+            --accent-soft-text: #fdba74;
+
+            --success: #22c55e;
+            --success-soft: #052e16;
+            --danger: #ef4444;
+            --danger-soft: #450a0a;
+            --danger-hover: #7f1d1d;
+
+            --hero-bg: #1a2232;
+            --hero-text: #ffffff;
+            --hero-muted: #94a3b8;
+
+            --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 4px 14px -2px rgba(0, 0, 0, 0.5);
+            --shadow-panel: 0 14px 30px -4px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 24px 20px 48px;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+        }
+
+        /* Top Header */
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .brand-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .brand-title span.badge-brand {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            background: var(--accent-soft);
+            color: var(--accent-brand);
+            letter-spacing: 0;
+        }
+
+        .brand-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 13px;
+            border-radius: var(--radius-base);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.12s ease;
+            white-space: nowrap;
+            background: transparent;
+            color: var(--text-primary);
+            user-select: none;
+        }
+
+        .btn:focus-visible {
+            outline: 2px solid var(--border-focus);
+            outline-offset: 2px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-brand {
+            background: var(--accent-brand);
+            color: #ffffff;
+            box-shadow: 0 1px 2px rgba(234, 88, 12, 0.25);
+        }
+        .btn-brand:hover {
+            background: var(--accent-brand-hover);
+        }
+
+        .btn-outline {
+            background: var(--bg-surface);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+        .btn-outline:hover {
+            background: var(--bg-surface-subtle);
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-sm {
+            padding: 6px 11px;
+            font-size: 12.5px;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+            border-radius: var(--radius-base);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .theme-toggle:hover {
+            background: var(--bg-surface-subtle);
+            color: var(--text-primary);
+        }
+
+        /* Recipe Bar */
+        .recipe-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-subtle);
+            flex-wrap: wrap;
+        }
+        .recipe-bar label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+        .recipe-bar select {
+            min-width: 180px;
+            flex: 1;
+            max-width: 320px;
+            font-weight: 600;
+        }
+
+        /* Workspace Grid */
+        .workspace {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .main-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Inputs & Form */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .input-inline {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        input, select {
+            width: 100%;
+            height: 38px;
+            padding: 0 11px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-base);
+            font-size: 13.5px;
+            color: var(--text-primary);
+            background-color: var(--bg-input);
+            transition: border-color 0.12s ease, box-shadow 0.12s ease;
+        }
+
+        input:hover, select:hover {
+            border-color: var(--border-hover);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+        }
+
+        .input-affix {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: var(--bg-surface-subtle);
+            padding: 8px 10px;
+            border-radius: var(--radius-base);
+            border: 1px solid var(--border-color);
+        }
+
+        .hint {
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-base);
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--bg-surface-subtle);
+            color: var(--text-secondary);
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 7px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover td {
+            background-color: var(--bg-surface-subtle);
+        }
+
+        tfoot tr td {
+            background-color: var(--bg-surface-subtle);
+            border-top: 2px solid var(--border-color);
+            padding: 10px 10px;
+            font-weight: 700;
+        }
+
+        .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .btn-del {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 16px;
+            line-height: 1;
+        }
+        .btn-del:hover {
+            background: var(--danger-hover);
+            color: var(--danger);
+        }
+
+        /* Option Toggles */
+        .opt-toggle-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--border-color);
+        }
+        .opt-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.12s ease;
+        }
+        .opt-toggle-btn:hover {
+            border-color: var(--accent-brand);
+            color: var(--accent-brand);
+        }
+        .opt-toggle-btn.on {
+            background: var(--accent-brand);
+            border-color: var(--accent-brand);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(234, 88, 12, 0.25);
+        }
+        .opt-toggle-btn .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            flex-shrink: 0;
+        }
+        .opt-toggle-btn.on .dot {
+            background: #ffffff;
+        }
+
+        .opt-box {
+            margin-top: 12px;
+            background: var(--bg-surface-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-base);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .opt-box-title {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .opt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        .opt-result {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
+        .opt-result strong {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+        }
+
+        /* Summary Panel Sticky */
+        .summary-panel {
+            position: sticky;
+            top: 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 18px;
+            box-shadow: var(--shadow-panel);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .summary-header {
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .summary-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .summary-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .summary-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+        }
+        .summary-row.total-row {
+            padding-top: 8px;
+            margin-top: 2px;
+            border-top: 1px dashed var(--border-color);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .summary-row.margin-row {
+            color: var(--success);
+            font-weight: 700;
+        }
+        .summary-row.selling-row {
+            padding-top: 8px;
+            margin-top: 2px;
+            border-top: 1px solid var(--border-color);
+            font-weight: 700;
+            color: var(--accent-brand);
+            font-size: 13.5px;
+        }
+
+        .price-hero {
+            background: var(--hero-bg);
+            color: var(--hero-text);
+            border-radius: var(--radius-base);
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .price-hero-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--hero-muted);
+            letter-spacing: 0.04em;
+        }
+        .price-hero-val {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+        .price-hero-profit {
+            font-size: 11.5px;
+            color: var(--hero-muted);
+        }
+        .price-hero-profit strong {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        /* Guide */
+        .guide-section {
+            margin-top: 28px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            box-shadow: var(--shadow-card);
+        }
+        .guide-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .guide-sub {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+            margin-bottom: 16px;
+        }
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .guide-step {
+            background: var(--bg-surface-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-base);
+            padding: 14px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .guide-num {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-sm);
+            background: var(--accent-brand);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .guide-step h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .guide-step p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+        .guide-tip {
+            margin-top: 14px;
+            background: var(--accent-soft);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-base);
+            padding: 12px 14px;
+            font-size: 12.5px;
+            color: var(--accent-soft-text);
+            line-height: 1.5;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%) translateY(70px);
+            background: var(--hero-bg);
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            z-index: 99;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .workspace { grid-template-columns: 1fr; }
+            .summary-panel { position: static; }
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 14px 12px 36px; }
+            .brand-title { font-size: 20px; }
+            .app-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .header-actions { width: 100%; }
+            .header-actions .btn, .theme-toggle { flex: 1; justify-content: center; font-size: 12px; padding: 6px 8px; }
+            .form-row { grid-template-columns: 1fr; }
+            .card { padding: 14px; }
+            th, td { font-size: 12px; padding: 6px 6px; }
+        }
+
+        @media print {
+            body { background: #ffffff !important; color: #000000 !important; padding: 0; }
+            .no-print, .theme-toggle, .btn-del, .recipe-bar { display: none !important; }
+            .workspace { grid-template-columns: 1fr; gap: 14px; }
+            .card, .summary-panel {
+                box-shadow: none !important;
+                border: 1px solid #cbd5e1 !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+                break-inside: avoid;
+            }
+            .price-hero {
+                background: #f1f5f9 !important;
+                color: #000000 !important;
+                border: 1px solid #cbd5e1;
+            }
+            .price-hero-val { color: #000000 !important; }
+            input, select {
+                border: 1px solid #e2e8f0 !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="app-header">
+        <div>
+            <div class="brand-title">
+                Kalkulator HPP Dapur
+                <span class="badge-brand">UMKM F&B</span>
+            </div>
+            <div class="brand-desc">Hitung modal resep, kemasan, gas/listrik, tenaga kerja, dan harga jual bersih.</div>
+        </div>
+        <div class="header-actions">
+            <button class="theme-toggle no-print" id="themeToggleBtn" onclick="toggleTheme()" type="button" aria-label="Ganti tema">
+                <span id="themeIcon">🌙</span>
+                <span id="themeLabel">Gelap</span>
+            </button>
+            <a href="#panduan" class="btn btn-outline btn-sm no-print" style="text-decoration:none;">Panduan</a>
+            <button class="btn btn-outline btn-sm no-print" onclick="loadGabinExample()" type="button">Contoh Resep</button>
+            <button class="btn btn-outline btn-sm no-print" onclick="resetForm()" type="button">Reset</button>
+            <button class="btn btn-brand btn-sm no-print" onclick="window.print()" type="button">Cetak</button>
+        </div>
+    </header>
+
+    <div class="recipe-bar no-print" role="region" aria-label="Kelola resep">
+        <label for="recipeSelect">Resep:</label>
+        <select id="recipeSelect" onchange="loadRecipeById(this.value)"></select>
+        <button class="btn btn-brand btn-sm" type="button" onclick="saveCurrentRecipe()">Simpan</button>
+        <button class="btn btn-outline btn-sm" type="button" onclick="newRecipe()">+ Baru</button>
+        <button class="btn btn-outline btn-sm" type="button" onclick="duplicateCurrentRecipe()">Duplikat</button>
+        <button class="btn btn-outline btn-sm" type="button" onclick="deleteCurrentRecipe()">Hapus</button>
+    </div>
+
+    <div class="workspace">
+        <main class="main-stack">
+            <!-- Info Produk -->
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-title">Produk & Target Yield</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 2;">
+                        <label for="recipeName">Nama Menu / Produk</label>
+                        <input type="text" id="recipeName" value="Gabin Bar Coklat" placeholder="Contoh: Brownies Panggang 20x20">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="portionYield">Hasil Jadi Sekali Masak</label>
+                        <div class="input-inline">
+                            <input type="number" id="portionYield" value="9" min="1" oninput="calculateAll()" class="num" style="width: 80px;">
+                            <input type="text" id="portionUnit" value="pcs" placeholder="pcs / box / cup" oninput="calculateAll()">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bahan Baku -->
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-title">Bahan Baku (1 Resep)</div>
+                    <button class="btn btn-brand btn-sm no-print" onclick="addIngredientRow()" type="button">+ Tambah Bahan</button>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 32%;">Bahan</th>
+                                <th style="width: 18%;" class="text-right">Harga Beli Pack (Rp)</th>
+                                <th style="width: 14%;" class="text-right">Isi Pack</th>
+                                <th style="width: 14%;" class="text-right">Pakai Resep</th>
+                                <th style="width: 9%;">Satuan</th>
+                                <th style="width: 13%;" class="text-right">Biaya (Rp)</th>
+                                <th style="width: 4%;" class="no-print"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="ingredientsBody"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Subtotal Bahan 1 Resep</td>
+                                <td id="totalIngredientsCost" class="text-right num">Rp 0</td>
+                                <td class="no-print"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="hint">Biaya = (Harga Beli / Isi Pack) × Takaran Resep</div>
+            </section>
+
+            <!-- Kemasan & Packaging -->
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-title">Kemasan & Packaging</div>
+                    <button class="btn btn-brand btn-sm no-print" onclick="addPackagingRow()" type="button">+ Tambah Kemasan</button>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 42%;">Item Kemasan</th>
+                                <th style="width: 25%;" class="text-right">Harga Beli Pack (Rp)</th>
+                                <th style="width: 15%;" class="text-right">Isi Pack</th>
+                                <th style="width: 18%;" class="text-right">Modal / Pcs (Rp)</th>
+                                <th style="width: 4%;" class="no-print"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="packagingBody"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Biaya Kemasan per 1 <span id="pkgUnitDisplay">pcs</span></td>
+                                <td id="packagingPerPcs" class="text-right num">Rp 0</td>
+                                <td class="no-print"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Total Kemasan 1 Resep (<span class="yieldDisplay">9</span> item)</td>
+                                <td id="totalPackagingCost" class="text-right num">Rp 0</td>
+                                <td class="no-print"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Biaya Tambahan & Margin -->
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-title">Operasional & Target Laba</div>
+                </div>
+
+                <div class="form-row" style="margin-bottom: 12px;">
+                    <div class="form-group">
+                        <label for="operasionalPercent">Gas, Listrik & Air</label>
+                        <div class="input-inline">
+                            <input type="number" id="operasionalPercent" value="10" min="0" max="100" oninput="calculateAll()" class="num">
+                            <span class="input-affix">%</span>
+                        </div>
+                        <div class="hint">Acuan 5% - 15% dari Bahan + Kemasan</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="laborPercent">Tenaga Kerja / Masak</label>
+                        <div class="input-inline">
+                            <input type="number" id="laborPercent" value="30" min="0" max="100" oninput="calculateAll()" class="num">
+                            <span class="input-affix">%</span>
+                        </div>
+                        <div class="hint">Acuan 20% - 35% dari Bahan + Kemasan</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="riskPercent">Risiko Rusak / Wastage</label>
+                        <div class="input-inline">
+                            <input type="number" id="riskPercent" value="10" min="0" max="100" oninput="calculateAll()" class="num">
+                            <span class="input-affix">%</span>
+                        </div>
+                        <div class="hint">Acuan 5% - 10% dari Bahan + Kemasan</div>
+                    </div>
+                </div>
+
+                <div class="form-row" style="padding-top: 12px; border-top: 1px dashed var(--border-color);">
+                    <div class="form-group">
+                        <label for="marginPercent">Target Laba</label>
+                        <div class="input-inline">
+                            <input type="number" id="marginPercent" value="50" min="0" max="500" oninput="calculateAll()" class="num">
+                            <span class="input-affix">%</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="marginMode">Metode Hitung Laba</label>
+                        <select id="marginMode" onchange="calculateAll()">
+                            <option value="margin" selected>Margin (Laba / Harga Jual)</option>
+                            <option value="markup">Markup (Laba / Modal HPP)</option>
+                        </select>
+                        <div class="hint" id="marginModeHint">Margin 50% → Harga = HPP / 0,5</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="roundingOption">Bulatkan Harga Jual</label>
+                        <select id="roundingOption" onchange="calculateAll()">
+                            <option value="0">Tanpa pembulatan</option>
+                            <option value="100">Ke Rp 100 terdekat</option>
+                            <option value="500" selected>Ke Rp 500 terdekat</option>
+                            <option value="1000">Ke Rp 1.000 terdekat</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="opt-toggle-row no-print">
+                    <input type="checkbox" id="toggleOnline" hidden>
+                    <input type="checkbox" id="toggleBep" hidden>
+                    <button type="button" class="opt-toggle-btn" id="btnToggleOnline" onclick="toggleOnline()" aria-pressed="false"><span class="dot"></span> Hitung Harga Ojol / Online</button>
+                    <button type="button" class="opt-toggle-btn" id="btnToggleBep" onclick="toggleBep()" aria-pressed="false"><span class="dot"></span> Target BEP Sewa Lapak</button>
+                </div>
+
+                <!-- Box Ojol -->
+                <div id="onlineBox" class="opt-box" style="display:none">
+                    <div class="opt-box-title">Simulasi Harga Aplikasi Online (Ojol)</div>
+                    <div class="opt-grid">
+                        <div class="form-group">
+                            <label for="marketplaceSelect">Pilihan Aplikasi</label>
+                            <select id="marketplaceSelect" onchange="applyMarketplacePreset()">
+                                <option value="gofood">GoFood / Grab / Shopee (20% + Rp1.000)</option>
+                                <option value="custom">Kustom Biaya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="onlineFee">Komisi (%)</label>
+                            <input type="number" id="onlineFee" value="20" min="0" max="50" step="0.5" oninput="calculateAll()" class="num">
+                        </div>
+                        <div class="form-group">
+                            <label for="onlineFixed">Biaya Transaksi (Rp)</label>
+                            <input type="number" id="onlineFixed" value="1000" min="0" oninput="calculateAll()" class="num">
+                        </div>
+                    </div>
+                    <div id="onlineResult" class="opt-result"></div>
+                    <div class="hint">Harga online dinaikkan agar uang bersih yang masuk tetap sesuai target harga offline.</div>
+                </div>
+
+                <!-- Box BEP -->
+                <div id="bepBox" class="opt-box" style="display:none">
+                    <div class="opt-box-title">Target Penjualan untuk Tutup Sewa (BEP)</div>
+                    <div class="opt-grid">
+                        <div class="form-group">
+                            <label for="fixedCostMonthly">Sewa & Gaji Tetap / Bulan (Rp)</label>
+                            <input type="number" id="fixedCostMonthly" value="1500000" min="0" oninput="calculateAll()" class="num">
+                        </div>
+                        <div class="form-group">
+                            <label for="daysPerMonth">Hari Jualan / Bulan</label>
+                            <input type="number" id="daysPerMonth" value="26" min="1" max="31" oninput="calculateAll()" class="num">
+                        </div>
+                        <div class="form-group">
+                            <label for="targetProfitMonthly">Target Laba Bersih / Bulan (Rp)</label>
+                            <input type="number" id="targetProfitMonthly" value="0" min="0" oninput="calculateAll()" class="num">
+                        </div>
+                    </div>
+                    <div id="bepResult" class="opt-result"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Sidebar Summary -->
+        <aside>
+            <div class="summary-panel">
+                <div class="summary-header">
+                    <div class="summary-title" id="summaryRecipeTitle">Ringkasan Modal</div>
+                    <div class="summary-subtitle">Yield Resep: <span id="summaryPortionYield" class="num">9 pcs</span></div>
+                </div>
+
+                <ul class="summary-list">
+                    <li class="summary-row">
+                        <span>Bahan Baku</span>
+                        <span class="num" id="sumIngredients">Rp 0</span>
+                    </li>
+                    <li class="summary-row">
+                        <span>Kemasan</span>
+                        <span class="num" id="sumPackaging">Rp 0</span>
+                    </li>
+                    <li class="summary-row">
+                        <span>Gas/Listrik (<span id="sumOpPct">10</span>%)</span>
+                        <span class="num" id="sumOperational">Rp 0</span>
+                    </li>
+                    <li class="summary-row">
+                        <span>Tenaga Kerja (<span id="sumLaborPct">30</span>%)</span>
+                        <span class="num" id="sumLabor">Rp 0</span>
+                    </li>
+                    <li class="summary-row">
+                        <span>Risiko (<span id="sumRiskPct">10</span>%)</span>
+                        <span class="num" id="sumRisk">Rp 0</span>
+                    </li>
+                    <li class="summary-row total-row">
+                        <span>Total HPP 1 Resep</span>
+                        <span class="num" id="sumTotalHPP">Rp 0</span>
+                    </li>
+                    <li class="summary-row">
+                        <span>Modal per <span id="sumUnitLabel">pcs</span></span>
+                        <span class="num" id="sumHppPerPcs">Rp 0</span>
+                    </li>
+                    <li class="summary-row margin-row">
+                        <span>Estimasi Laba 1 Resep</span>
+                        <span class="num" id="sumMargin">Rp 0</span>
+                    </li>
+                    <li class="summary-row selling-row">
+                        <span>Total Omzet 1 Resep</span>
+                        <span class="num" id="sumTotalSellingPrice">Rp 0</span>
+                    </li>
+                </ul>
+
+                <div class="price-hero">
+                    <div class="price-hero-label">SARAN HARGA JUAL</div>
+                    <div class="price-hero-val" id="recommendedPricePerPcs">Rp 0</div>
+                    <div class="price-hero-profit">Untung bersih <strong id="profitPerPcs" class="num">Rp 0</strong> / <span id="unitLabel">pcs</span></div>
+                </div>
+
+                <button class="btn btn-outline btn-sm no-print" onclick="copyWA()" type="button" style="width:100%;">Salin Ringkasan WhatsApp</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Panduan -->
+    <section class="guide-section no-print" id="panduan">
+        <div class="guide-title">Cara Pakai</div>
+        <div class="guide-sub">Alur cepat menghitung modal dan harga jual menu makanan/minuman.</div>
+        <div class="guide-grid">
+            <div class="guide-step">
+                <div class="guide-num">1</div>
+                <div>
+                    <h4>Nama Menu & Hasil Masak</h4>
+                    <p>Masukkan nama produk dan jumlah porsi/pcs yang didapat dari 1 kali proses masak.</p>
+                </div>
+            </div>
+            <div class="guide-step">
+                <div class="guide-num">2</div>
+                <div>
+                    <h4>Daftar Bahan Baku</h4>
+                    <p>Tulis harga beli 1 pack toko, isi pack, dan jumlah gram/ml yang dipakai di resep.</p>
+                </div>
+            </div>
+            <div class="guide-step">
+                <div class="guide-num">3</div>
+                <div>
+                    <h4>Kemasan</h4>
+                    <p>Masukkan plastik, cup, box, stiker, atau sendok agar biaya per porsi terhitung pas.</p>
+                </div>
+            </div>
+            <div class="guide-step">
+                <div class="guide-num">4</div>
+                <div>
+                    <h4>Gas, Tenaga & Laba</h4>
+                    <p>Atur persentase operasional dapur, upah masak, risiko rusak, dan target laba yang diinginkan.</p>
+                </div>
+            </div>
+        </div>
+        <div class="guide-tip">
+            <strong>Beda Margin dan Markup:</strong> Margin 50% berarti laba adalah setengah dari harga jual (HPP Rp10.000 dijual Rp20.000). Markup 50% berarti menambahkan 50% dari modal (HPP Rp10.000 dijual Rp15.000).
+        </div>
+    </section>
+</div>
+
+<div class="toast" id="appToast">Ringkasan disalin</div>
+
+<script>
+    const SAMPLE_DATA = {
+        name: "Gabin Bar Coklat",
+        portion: 9,
+        portionUnit: "pcs",
+        ingredients: [
+            { name: "Gabin Nissin (2 bungkus)", packPrice: 14000, packSize: 28, recipeQty: 18, unit: "pcs" },
+            { name: "Whipcream (Haan)", packPrice: 35000, packSize: 200, recipeQty: 200, unit: "gr" },
+            { name: "Bubuk Coklat (Van Houten)", packPrice: 20000, packSize: 40, recipeQty: 10, unit: "gr" },
+            { name: "Air", packPrice: 3000, packSize: 600, recipeQty: 400, unit: "ml" },
+            { name: "Agarasa Coklat", packPrice: 5500, packSize: 22, recipeQty: 3, unit: "gr" },
+            { name: "Susu UHT", packPrice: 20000, packSize: 1000, recipeQty: 40, unit: "ml" },
+            { name: "Chocochips", packPrice: 8000, packSize: 100, recipeQty: 50, unit: "gr" }
+        ],
+        packaging: [
+            { name: "Aluminium Foil 15x30", packPrice: 27000, packSize: 53 },
+            { name: "Stiker Logo", packPrice: 20000, packSize: 100 }
+        ],
+        operasional: 10,
+        labor: 30,
+        risk: 10,
+        margin: 50
+    };
+
+    function formatRupiah(number) {
+        return 'Rp ' + Math.round(number).toLocaleString('id-ID');
+    }
+
+    function initTheme() {
+        const saved = localStorage.getItem('theme');
+        const isDark = saved ? saved === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        applyTheme(isDark ? 'dark' : 'light');
+    }
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        const icon = document.getElementById('themeIcon');
+        const label = document.getElementById('themeLabel');
+        if (theme === 'dark') {
+            icon.textContent = '☀️';
+            label.textContent = 'Terang';
+        } else {
+            icon.textContent = '🌙';
+            label.textContent = 'Gelap';
+        }
+    }
+
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    function renderIngredients(items) {
+        const tbody = document.getElementById('ingredientsBody');
+        tbody.innerHTML = '';
+        items.forEach((item) => {
+            const cost = item.packSize > 0 ? (item.packPrice / item.packSize) * item.recipeQty : 0;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="text" class="ing-name" value="${item.name}" placeholder="Nama bahan"></td>
+                <td><input type="number" class="ing-pack-price num text-right" value="${item.packPrice}" min="0" oninput="calculateAll()"></td>
+                <td><input type="number" class="ing-pack-size num text-right" value="${item.packSize}" min="1" oninput="calculateAll()"></td>
+                <td><input type="number" class="ing-recipe-qty num text-right" value="${item.recipeQty}" min="0" step="any" oninput="calculateAll()"></td>
+                <td>
+                    <select class="ing-unit">
+                        <option value="gr" ${item.unit === 'gr' ? 'selected' : ''}>gr</option>
+                        <option value="ml" ${item.unit === 'ml' ? 'selected' : ''}>ml</option>
+                        <option value="pcs" ${item.unit === 'pcs' ? 'selected' : ''}>pcs</option>
+                        <option value="kg" ${item.unit === 'kg' ? 'selected' : ''}>kg</option>
+                        <option value="liter" ${item.unit === 'liter' ? 'selected' : ''}>liter</option>
+                        <option value="sdm" ${item.unit === 'sdm' ? 'selected' : ''}>sdm</option>
+                        <option value="sdt" ${item.unit === 'sdt' ? 'selected' : ''}>sdt</option>
+                    </select>
+                </td>
+                <td class="text-right num ing-cost">${formatRupiah(cost)}</td>
+                <td class="no-print text-right">
+                    <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderPackaging(items) {
+        const tbody = document.getElementById('packagingBody');
+        tbody.innerHTML = '';
+        items.forEach((item) => {
+            const costPerPcs = item.packSize > 0 ? (item.packPrice / item.packSize) : 0;
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input type="text" class="pkg-name" value="${item.name}" placeholder="Nama kemasan"></td>
+                <td><input type="number" class="pkg-pack-price num text-right" value="${item.packPrice}" min="0" oninput="calculateAll()"></td>
+                <td><input type="number" class="pkg-pack-size num text-right" value="${item.packSize}" min="1" oninput="calculateAll()"></td>
+                <td class="text-right num pkg-cost">${formatRupiah(costPerPcs)}</td>
+                <td class="no-print text-right">
+                    <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function addIngredientRow() {
+        const tbody = document.getElementById('ingredientsBody');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><input type="text" class="ing-name" placeholder="Nama bahan"></td>
+            <td><input type="number" class="ing-pack-price num text-right" value="0" min="0" oninput="calculateAll()"></td>
+            <td><input type="number" class="ing-pack-size num text-right" value="1" min="1" oninput="calculateAll()"></td>
+            <td><input type="number" class="ing-recipe-qty num text-right" value="0" min="0" step="any" oninput="calculateAll()"></td>
+            <td>
+                <select class="ing-unit">
+                    <option value="gr">gr</option>
+                    <option value="ml">ml</option>
+                    <option value="pcs">pcs</option>
+                    <option value="kg">kg</option>
+                    <option value="liter">liter</option>
+                    <option value="sdm">sdm</option>
+                    <option value="sdt">sdt</option>
+                </select>
+            </td>
+            <td class="text-right num ing-cost">Rp 0</td>
+            <td class="no-print text-right">
+                <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+        calculateAll();
+    }
+
+    function addPackagingRow() {
+        const tbody = document.getElementById('packagingBody');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><input type="text" class="pkg-name" placeholder="Item kemasan"></td>
+            <td><input type="number" class="pkg-pack-price num text-right" value="0" min="0" oninput="calculateAll()"></td>
+            <td><input type="number" class="pkg-pack-size num text-right" value="1" min="1" oninput="calculateAll()"></td>
+            <td class="text-right num pkg-cost">Rp 0</td>
+            <td class="no-print text-right">
+                <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+        calculateAll();
+    }
+
+    function removeRow(btn) {
+        btn.closest('tr').remove();
+        calculateAll();
+    }
+
+    const STORAGE_KEY = 'hpp_recipes_v1';
+    let currentRecipeId = null;
+
+    function syncToggleButtons() {
+        const on = document.getElementById('toggleOnline').checked;
+        const btn = document.getElementById('btnToggleOnline');
+        if (btn) { btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); }
+
+        const bep = document.getElementById('toggleBep').checked;
+        const btnB = document.getElementById('btnToggleBep');
+        if (btnB) { btnB.classList.toggle('on', bep); btnB.setAttribute('aria-pressed', String(bep)); }
+
+        document.getElementById('onlineBox').style.display = on ? 'flex' : 'none';
+        document.getElementById('bepBox').style.display = bep ? 'flex' : 'none';
+    }
+
+    function toggleOnline() {
+        document.getElementById('toggleOnline').checked = !document.getElementById('toggleOnline').checked;
+        syncToggleButtons();
+        calculateAll();
+    }
+
+    function toggleBep() {
+        document.getElementById('toggleBep').checked = !document.getElementById('toggleBep').checked;
+        syncToggleButtons();
+        calculateAll();
+    }
+
+    function applyMarketplacePreset() {
+        const sel = document.getElementById('marketplaceSelect').value;
+        const feeInput = document.getElementById('onlineFee');
+        const fixedInput = document.getElementById('onlineFixed');
+        if (sel === 'gofood') {
+            feeInput.value = 20;
+            fixedInput.value = 1000;
+        }
+        calculateAll();
+    }
+
+    function calculateAll() {
+        const yieldPortion = Math.max(1, parseFloat(document.getElementById('portionYield').value) || 1);
+        const portionUnit = document.getElementById('portionUnit').value.trim() || 'pcs';
+        const recipeName = document.getElementById('recipeName').value.trim() || 'Menu';
+
+        document.querySelectorAll('.yieldDisplay').forEach(el => el.textContent = yieldPortion);
+        document.getElementById('summaryPortionYield').textContent = `${yieldPortion} ${portionUnit}`;
+        document.getElementById('summaryRecipeTitle').textContent = recipeName;
+        document.getElementById('unitLabel').textContent = portionUnit;
+        const pkgUnit = document.getElementById('pkgUnitDisplay');
+        if (pkgUnit) pkgUnit.textContent = portionUnit;
+        const sumUnit = document.getElementById('sumUnitLabel');
+        if (sumUnit) sumUnit.textContent = portionUnit;
+
+        // 1. Bahan
+        let totalIngredients = 0;
+        document.querySelectorAll('#ingredientsBody tr').forEach(row => {
+            const packPrice = Math.max(0, parseFloat(row.querySelector('.ing-pack-price').value) || 0);
+            const packSize = Math.max(0.0001, parseFloat(row.querySelector('.ing-pack-size').value) || 1);
+            const recipeQty = Math.max(0, parseFloat(row.querySelector('.ing-recipe-qty').value) || 0);
+            const cost = (packPrice / packSize) * recipeQty;
+            totalIngredients += cost;
+            row.querySelector('.ing-cost').textContent = formatRupiah(cost);
+        });
+        document.getElementById('totalIngredientsCost').textContent = formatRupiah(totalIngredients);
+
+        // 2. Kemasan
+        let pkgPerPcsTotal = 0;
+        document.querySelectorAll('#packagingBody tr').forEach(row => {
+            const packPrice = Math.max(0, parseFloat(row.querySelector('.pkg-pack-price').value) || 0);
+            const packSize = Math.max(0.0001, parseFloat(row.querySelector('.pkg-pack-size').value) || 1);
+            const costPerPcs = packPrice / packSize;
+            pkgPerPcsTotal += costPerPcs;
+            row.querySelector('.pkg-cost').textContent = formatRupiah(costPerPcs);
+        });
+        const totalPackaging = pkgPerPcsTotal * yieldPortion;
+        document.getElementById('packagingPerPcs').textContent = formatRupiah(pkgPerPcsTotal);
+        document.getElementById('totalPackagingCost').textContent = formatRupiah(totalPackaging);
+
+        // 3. Biaya Langsung
+        const biayaLangsung = totalIngredients + totalPackaging;
+
+        // 4. Biaya Operasional & Risiko
+        const opPct = Math.max(0, parseFloat(document.getElementById('operasionalPercent').value) || 0);
+        const laborPct = Math.max(0, parseFloat(document.getElementById('laborPercent').value) || 0);
+        const riskPct = Math.max(0, parseFloat(document.getElementById('riskPercent').value) || 0);
+        const marginPct = Math.max(0, parseFloat(document.getElementById('marginPercent').value) || 0);
+        const marginMode = document.getElementById('marginMode').value;
+
+        const opCost = biayaLangsung * (opPct / 100);
+        const laborCost = biayaLangsung * (laborPct / 100);
+        const riskCost = biayaLangsung * (riskPct / 100);
+
+        const totalHPP = biayaLangsung + opCost + laborCost + riskCost;
+        const hppPerPcs = yieldPortion > 0 ? totalHPP / yieldPortion : 0;
+
+        // 5. Harga Jual
+        let sellingPricePerPcs = hppPerPcs;
+        if (marginMode === 'margin') {
+            const cappedMargin = Math.min(99.9, marginPct);
+            const factor = 1 - (cappedMargin / 100);
+            sellingPricePerPcs = factor > 0 ? (hppPerPcs / factor) : hppPerPcs;
+            document.getElementById('marginModeHint').textContent = `Margin ${marginPct}% → Harga = Modal / ${(1 - cappedMargin/100).toFixed(2)}`;
+        } else {
+            sellingPricePerPcs = hppPerPcs * (1 + marginPct / 100);
+            document.getElementById('marginModeHint').textContent = `Markup ${marginPct}% → Harga = Modal × ${(1 + marginPct/100).toFixed(2)}`;
+        }
+
+        const roundVal = parseInt(document.getElementById('roundingOption').value) || 0;
+        let finalPricePerPcs = sellingPricePerPcs;
+        if (roundVal > 0) {
+            finalPricePerPcs = Math.ceil(sellingPricePerPcs / roundVal) * roundVal;
+        }
+
+        const profitPerPcs = finalPricePerPcs - hppPerPcs;
+        const totalProfit = profitPerPcs * yieldPortion;
+
+        // Panel Ringkasan
+        document.getElementById('sumIngredients').textContent = formatRupiah(totalIngredients);
+        document.getElementById('sumPackaging').textContent = formatRupiah(totalPackaging);
+        document.getElementById('sumOpPct').textContent = opPct;
+        document.getElementById('sumOperational').textContent = formatRupiah(opCost);
+        document.getElementById('sumLaborPct').textContent = laborPct;
+        document.getElementById('sumLabor').textContent = formatRupiah(laborCost);
+        document.getElementById('sumRiskPct').textContent = riskPct;
+        document.getElementById('sumRisk').textContent = formatRupiah(riskCost);
+        document.getElementById('sumTotalHPP').textContent = formatRupiah(totalHPP);
+        document.getElementById('sumHppPerPcs').textContent = formatRupiah(hppPerPcs);
+
+        document.getElementById('sumMargin').textContent = formatRupiah(totalProfit);
+        document.getElementById('sumTotalSellingPrice').textContent = formatRupiah(finalPricePerPcs * yieldPortion);
+
+        document.getElementById('recommendedPricePerPcs').textContent = formatRupiah(finalPricePerPcs);
+        document.getElementById('profitPerPcs').textContent = formatRupiah(profitPerPcs);
+
+        // 6. Online Ojol
+        const isOnline = document.getElementById('toggleOnline').checked;
+        if (isOnline) {
+            const feePct = Math.min(99, Math.max(0, parseFloat(document.getElementById('onlineFee').value) || 0));
+            const fixedFee = Math.max(0, parseFloat(document.getElementById('onlineFixed').value) || 0);
+            const onlineDenom = 1 - (feePct / 100);
+            let rawOnline = onlineDenom > 0 ? (finalPricePerPcs + fixedFee) / onlineDenom : finalPricePerPcs;
+            let finalOnline = roundVal > 0 ? Math.ceil(rawOnline / roundVal) * roundVal : rawOnline;
+
+            const feeDeduction = (finalOnline * (feePct / 100)) + fixedFee;
+            const netReceived = finalOnline - feeDeduction;
+            const netProfitOnline = netReceived - hppPerPcs;
+
+            document.getElementById('onlineResult').innerHTML = `
+                <div>Harga jual di aplikasi: <strong>${formatRupiah(finalOnline)}</strong> / ${portionUnit}</div>
+                <div class="hint" style="margin-top:4px;">Potongan aplikasi: ${formatRupiah(feeDeduction)} • Uang diterima: <strong>${formatRupiah(netReceived)}</strong> • Untung bersih: <strong>${formatRupiah(netProfitOnline)}</strong></div>
+            `;
+        }
+
+        // 7. BEP Sewa
+        const isBep = document.getElementById('toggleBep').checked;
+        if (isBep) {
+            const fixedMonthly = Math.max(0, parseFloat(document.getElementById('fixedCostMonthly').value) || 0);
+            const days = Math.max(1, parseFloat(document.getElementById('daysPerMonth').value) || 26);
+            const targetProfit = Math.max(0, parseFloat(document.getElementById('targetProfitMonthly').value) || 0);
+            const bepDiv = document.getElementById('bepResult');
+
+            if (profitPerPcs <= 0) {
+                bepDiv.innerHTML = `<span style="color:var(--danger);">Harga jual belum menghasilkan untung. Naikkan harga atau margin.</span>`;
+            } else {
+                const bepMonthlyPcs = Math.ceil(fixedMonthly / profitPerPcs);
+                const bepDailyPcs = Math.ceil(bepMonthlyPcs / days);
+                const bepOmzetMonthly = bepMonthlyPcs * finalPricePerPcs;
+
+                let targetHtml = '';
+                if (targetProfit > 0) {
+                    const targetMonthlyPcs = Math.ceil((fixedMonthly + targetProfit) / profitPerPcs);
+                    const targetDailyPcs = Math.ceil(targetMonthlyPcs / days);
+                    targetHtml = `<div>Target + Laba ${formatRupiah(targetProfit)}/bln: <strong>${targetMonthlyPcs} ${portionUnit}/bulan</strong> (≈ <strong>${targetDailyPcs} ${portionUnit}/hari</strong>)</div>`;
+                }
+
+                bepDiv.innerHTML = `
+                    <div>Minimal laku untuk tutup sewa:</div>
+                    <div>• Per Bulan: <strong>${bepMonthlyPcs} ${portionUnit}</strong> (Omzet: ${formatRupiah(bepOmzetMonthly)})</div>
+                    <div>• Per Hari (${days} hari jualan): <strong>${bepDailyPcs} ${portionUnit}/hari</strong></div>
+                    ${targetHtml}
+                `;
+            }
+        }
+    }
+
+    function copyWA() {
+        const recipeName = document.getElementById('recipeName').value || 'Menu';
+        const yieldPortion = document.getElementById('portionYield').value || '1';
+        const portionUnit = document.getElementById('portionUnit').value || 'pcs';
+        const sumTotalHPP = document.getElementById('sumTotalHPP').textContent;
+        const sumHppPerPcs = document.getElementById('sumHppPerPcs').textContent;
+        const recPrice = document.getElementById('recommendedPricePerPcs').textContent;
+        const profit = document.getElementById('profitPerPcs').textContent;
+
+        let txt = `*HITUNGAN HPP & HARGA JUAL*\n`;
+        txt += `Menu: *${recipeName}*\n`;
+        txt += `Porsi Resep: ${yieldPortion} ${portionUnit}\n`;
+        txt += `--------------------------------\n`;
+        txt += `• Modal HPP 1 Resep: ${sumTotalHPP}\n`;
+        txt += `• Modal / ${portionUnit}: ${sumHppPerPcs}\n`;
+        txt += `• *Harga Jual Disarankan:* *${recPrice}* / ${portionUnit}\n`;
+        txt += `• Untung Bersih: *${profit}* / ${portionUnit}\n`;
+
+        if (document.getElementById('toggleOnline').checked) {
+            const onlineTxt = document.getElementById('onlineResult').innerText.replace(/\n+/g, ' • ');
+            txt += `--------------------------------\n`;
+            txt += `🛵 *Online (Ojol):* ${onlineTxt}\n`;
+        }
+
+        if (document.getElementById('toggleBep').checked) {
+            const bepTxt = document.getElementById('bepResult').innerText.replace(/\n+/g, ' | ');
+            txt += `--------------------------------\n`;
+            txt += `📊 *Target BEP:* ${bepTxt}\n`;
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(txt).then(() => showToast('Ringkasan disalin ke clipboard')).catch(() => window.prompt('Salin teks berikut:', txt));
+        } else {
+            window.prompt('Salin teks berikut:', txt);
+        }
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('appToast');
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function getStoredRecipes() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return null;
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function saveAllRecipes(recipes) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
+        updateRecipeSelectOptions();
+    }
+
+    function collectCurrentFormData() {
+        const ingredients = [];
+        document.querySelectorAll('#ingredientsBody tr').forEach(r => {
+            ingredients.push({
+                name: r.querySelector('.ing-name').value,
+                packPrice: parseFloat(r.querySelector('.ing-pack-price').value) || 0,
+                packSize: parseFloat(r.querySelector('.ing-pack-size').value) || 1,
+                recipeQty: parseFloat(r.querySelector('.ing-recipe-qty').value) || 0,
+                unit: r.querySelector('.ing-unit').value
+            });
+        });
+
+        const packaging = [];
+        document.querySelectorAll('#packagingBody tr').forEach(r => {
+            packaging.push({
+                name: r.querySelector('.pkg-name').value,
+                packPrice: parseFloat(r.querySelector('.pkg-pack-price').value) || 0,
+                packSize: parseFloat(r.querySelector('.pkg-pack-size').value) || 1
+            });
+        });
+
+        return {
+            id: currentRecipeId || ('rec_' + Date.now()),
+            name: document.getElementById('recipeName').value.trim() || 'Menu Baru',
+            portion: parseFloat(document.getElementById('portionYield').value) || 1,
+            portionUnit: document.getElementById('portionUnit').value.trim() || 'pcs',
+            operasional: parseFloat(document.getElementById('operasionalPercent').value) || 0,
+            labor: parseFloat(document.getElementById('laborPercent').value) || 0,
+            risk: parseFloat(document.getElementById('riskPercent').value) || 0,
+            margin: parseFloat(document.getElementById('marginPercent').value) || 0,
+            marginMode: document.getElementById('marginMode').value,
+            rounding: document.getElementById('roundingOption').value,
+            isOnline: document.getElementById('toggleOnline').checked,
+            onlineMarketplace: document.getElementById('marketplaceSelect').value,
+            onlineFee: parseFloat(document.getElementById('onlineFee').value) || 20,
+            onlineFixed: parseFloat(document.getElementById('onlineFixed').value) || 1000,
+            isBep: document.getElementById('toggleBep').checked,
+            fixedCostMonthly: parseFloat(document.getElementById('fixedCostMonthly').value) || 1500000,
+            daysPerMonth: parseFloat(document.getElementById('daysPerMonth').value) || 26,
+            targetProfitMonthly: parseFloat(document.getElementById('targetProfitMonthly').value) || 0,
+            ingredients: ingredients,
+            packaging: packaging,
+            updatedAt: Date.now()
+        };
+    }
+
+    function populateFormWithData(data) {
+        currentRecipeId = data.id || ('rec_' + Date.now());
+        document.getElementById('recipeName').value = data.name || 'Menu Baru';
+        document.getElementById('portionYield').value = data.portion || 1;
+        document.getElementById('portionUnit').value = data.portionUnit || 'pcs';
+        document.getElementById('operasionalPercent').value = data.operasional !== undefined ? data.operasional : 10;
+        document.getElementById('laborPercent').value = data.labor !== undefined ? data.labor : 30;
+        document.getElementById('riskPercent').value = data.risk !== undefined ? data.risk : 10;
+        document.getElementById('marginPercent').value = data.margin !== undefined ? data.margin : 50;
+        if (data.marginMode) document.getElementById('marginMode').value = data.marginMode;
+        if (data.rounding) document.getElementById('roundingOption').value = data.rounding;
+
+        document.getElementById('toggleOnline').checked = !!data.isOnline;
+        if (data.onlineMarketplace) document.getElementById('marketplaceSelect').value = data.onlineMarketplace;
+        if (data.onlineFee !== undefined) document.getElementById('onlineFee').value = data.onlineFee;
+        if (data.onlineFixed !== undefined) document.getElementById('onlineFixed').value = data.onlineFixed;
+
+        document.getElementById('toggleBep').checked = !!data.isBep;
+        if (data.fixedCostMonthly !== undefined) document.getElementById('fixedCostMonthly').value = data.fixedCostMonthly;
+        if (data.daysPerMonth !== undefined) document.getElementById('daysPerMonth').value = data.daysPerMonth;
+        if (data.targetProfitMonthly !== undefined) document.getElementById('targetProfitMonthly').value = data.targetProfitMonthly;
+        syncToggleButtons();
+
+        renderIngredients(data.ingredients || []);
+        renderPackaging(data.packaging || []);
+        calculateAll();
+    }
+
+    function updateRecipeSelectOptions() {
+        const sel = document.getElementById('recipeSelect');
+        if (!sel) return;
+        const recipes = getStoredRecipes() || [];
+        sel.innerHTML = '';
+        recipes.forEach(r => {
+            const opt = document.createElement('option');
+            opt.value = r.id;
+            opt.textContent = r.name;
+            if (r.id === currentRecipeId) opt.selected = true;
+            sel.appendChild(opt);
+        });
+    }
+
+    function initRecipes() {
+        let recipes = getStoredRecipes();
+        if (!recipes) {
+            const initial = {
+                id: 'rec_sample_gabin',
+                ...SAMPLE_DATA,
+                marginMode: 'margin',
+                rounding: '500',
+                isOnline: false,
+                isBep: false,
+                updatedAt: Date.now()
+            };
+            recipes = [initial];
+            saveAllRecipes(recipes);
+        }
+        currentRecipeId = recipes[0].id;
+        updateRecipeSelectOptions();
+        populateFormWithData(recipes[0]);
+    }
+
+    function loadRecipeById(id) {
+        const recipes = getStoredRecipes() || [];
+        const found = recipes.find(r => r.id === id);
+        if (found) {
+            populateFormWithData(found);
+            updateRecipeSelectOptions();
+        }
+    }
+
+    function saveCurrentRecipe() {
+        const data = collectCurrentFormData();
+        let recipes = getStoredRecipes() || [];
+        const idx = recipes.findIndex(r => r.id === data.id);
+        if (idx >= 0) recipes[idx] = data;
+        else recipes.push(data);
+        currentRecipeId = data.id;
+        saveAllRecipes(recipes);
+        showToast('Resep disimpan');
+    }
+
+    function newRecipe() {
+        currentRecipeId = 'rec_' + Date.now();
+        resetForm();
+        document.getElementById('recipeName').value = 'Menu Baru';
+        saveCurrentRecipe();
+    }
+
+    function duplicateCurrentRecipe() {
+        const data = collectCurrentFormData();
+        data.id = 'rec_' + Date.now();
+        data.name = `${data.name} (Salinan)`;
+        let recipes = getStoredRecipes() || [];
+        recipes.push(data);
+        currentRecipeId = data.id;
+        saveAllRecipes(recipes);
+        populateFormWithData(data);
+        showToast('Resep diduplikasi');
+    }
+
+    function deleteCurrentRecipe() {
+        let recipes = getStoredRecipes() || [];
+        if (recipes.length <= 1) {
+            alert('Minimal 1 resep tersimpan.');
+            return;
+        }
+        if (!confirm(`Hapus resep "${document.getElementById('recipeName').value}"?`)) return;
+        recipes = recipes.filter(r => r.id !== currentRecipeId);
+        currentRecipeId = recipes[0].id;
+        saveAllRecipes(recipes);
+        populateFormWithData(recipes[0]);
+        showToast('Resep dihapus');
+    }
+
+    function loadGabinExample() {
+        populateFormWithData({
+            id: 'rec_sample_gabin',
+            ...SAMPLE_DATA,
+            marginMode: 'margin',
+            rounding: '500',
+            isOnline: false,
+            isBep: false
+        });
+    }
+
+    function resetForm() {
+        document.getElementById('recipeName').value = "Menu Baru";
+        document.getElementById('portionYield').value = 1;
+        document.getElementById('portionUnit').value = "pcs";
+        document.getElementById('operasionalPercent').value = 10;
+        document.getElementById('laborPercent').value = 30;
+        document.getElementById('riskPercent').value = 10;
+        document.getElementById('marginPercent').value = 50;
+        renderIngredients([{ name: "", packPrice: 0, packSize: 1, recipeQty: 0, unit: "gr" }]);
+        renderPackaging([{ name: "", packPrice: 0, packSize: 1 }]);
+        calculateAll();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        initRecipes();
+    });
+</script>
+</body>
+</html>
