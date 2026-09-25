@@ -2,6 +2,7 @@
 <html lang="id" data-theme="light">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator HPP & Harga Jual Dapur UMKM</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -739,7 +740,7 @@
                 <span id="themeLabel">Gelap</span>
             </button>
             <a href="#panduan" class="btn btn-outline btn-sm no-print" style="text-decoration:none;">Panduan</a>
-            <button class="btn btn-outline btn-sm no-print" onclick="loadGabinExample()" type="button">Contoh Resep</button>
+            <button class="btn btn-outline btn-sm no-print" onclick="loadDimsumExample()" type="button">Contoh Resep</button>
             <button class="btn btn-outline btn-sm no-print" onclick="resetForm()" type="button">Reset</button>
             <button class="btn btn-brand btn-sm no-print" onclick="window.print()" type="button">Cetak</button>
         </div>
@@ -764,12 +765,12 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label for="recipeName">Nama Menu / Produk</label>
-                        <input type="text" id="recipeName" value="Gabin Bar Coklat" placeholder="Contoh: Brownies Panggang 20x20">
+                        <input type="text" id="recipeName" value="Dimsum Ayam Udang" placeholder="Contoh: Brownies Panggang 20x20">
                     </div>
                     <div class="form-group" style="flex: 1;">
                         <label for="portionYield">Hasil Jadi Sekali Masak</label>
                         <div class="input-inline">
-                            <input type="number" id="portionYield" value="9" min="1" oninput="calculateAll()" class="num" style="width: 80px;">
+                            <input type="number" id="portionYield" value="30" min="1" oninput="calculateAll()" class="num" style="width: 80px;">
                             <input type="text" id="portionUnit" value="pcs" placeholder="pcs / box / cup" oninput="calculateAll()">
                         </div>
                     </div>
@@ -1062,26 +1063,38 @@
 <div class="toast" id="appToast">Ringkasan disalin</div>
 
 <script>
+    function escHtml(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
     const SAMPLE_DATA = {
-        name: "Gabin Bar Coklat",
-        portion: 9,
+        name: "Dimsum Ayam Udang",
+        portion: 30,
         portionUnit: "pcs",
         ingredients: [
-            { name: "Gabin Nissin (2 bungkus)", packPrice: 14000, packSize: 28, recipeQty: 18, unit: "pcs" },
-            { name: "Whipcream (Haan)", packPrice: 35000, packSize: 200, recipeQty: 200, unit: "gr" },
-            { name: "Bubuk Coklat (Van Houten)", packPrice: 20000, packSize: 40, recipeQty: 10, unit: "gr" },
-            { name: "Air", packPrice: 3000, packSize: 600, recipeQty: 400, unit: "ml" },
-            { name: "Agarasa Coklat", packPrice: 5500, packSize: 22, recipeQty: 3, unit: "gr" },
-            { name: "Susu UHT", packPrice: 20000, packSize: 1000, recipeQty: 40, unit: "ml" },
-            { name: "Chocochips", packPrice: 8000, packSize: 100, recipeQty: 50, unit: "gr" }
+            { name: "Paha Ayam Fillet", packPrice: 48000, packSize: 1000, recipeQty: 500, unit: "gr" },
+            { name: "Udang Kupas", packPrice: 75000, packSize: 1000, recipeQty: 200, unit: "gr" },
+            { name: "Tepung Tapioka", packPrice: 12000, packSize: 1000, recipeQty: 100, unit: "gr" },
+            { name: "Kulit Dimsum / Pangsit", packPrice: 15000, packSize: 50, recipeQty: 30, unit: "pcs" },
+            { name: "Minyak Wijen", packPrice: 32000, packSize: 200, recipeQty: 15, unit: "ml" },
+            { name: "Saus Tiram", packPrice: 18000, packSize: 270, recipeQty: 20, unit: "gr" },
+            { name: "Bawang Putih Goreng", packPrice: 15000, packSize: 150, recipeQty: 20, unit: "gr" },
+            { name: "Daun Bawang", packPrice: 5000, packSize: 200, recipeQty: 50, unit: "gr" },
+            { name: "Wortel Parut (Topping)", packPrice: 4000, packSize: 250, recipeQty: 50, unit: "gr" }
         ],
         packaging: [
-            { name: "Aluminium Foil 15x30", packPrice: 27000, packSize: 53 },
-            { name: "Stiker Logo", packPrice: 20000, packSize: 100 }
+            { name: "Mika Box / Thinwall 500ml (isi 6)", packPrice: 25000, packSize: 25 },
+            { name: "Cup Saus Mini 25ml", packPrice: 12000, packSize: 50 },
+            { name: "Sumpit Bambu + Plastik", packPrice: 15000, packSize: 50 },
+            { name: "Stiker Logo Brand", packPrice: 20000, packSize: 100 }
         ],
         operasional: 10,
-        labor: 30,
-        risk: 10,
+        labor: 25,
+        risk: 5,
         margin: 50
     };
 
@@ -1121,10 +1134,10 @@
             const cost = item.packSize > 0 ? (item.packPrice / item.packSize) * item.recipeQty : 0;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="text" class="ing-name" value="${item.name}" placeholder="Nama bahan"></td>
-                <td><input type="number" class="ing-pack-price num text-right" value="${item.packPrice}" min="0" oninput="calculateAll()"></td>
-                <td><input type="number" class="ing-pack-size num text-right" value="${item.packSize}" min="1" oninput="calculateAll()"></td>
-                <td><input type="number" class="ing-recipe-qty num text-right" value="${item.recipeQty}" min="0" step="any" oninput="calculateAll()"></td>
+                <td><input type="text" class="ing-name" value="${escHtml(item.name)}" placeholder="Nama bahan"></td>
+                <td><input type="number" class="ing-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()"></td>
+                <td><input type="number" class="ing-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()"></td>
+                <td><input type="number" class="ing-recipe-qty num text-right" value="${escHtml(item.recipeQty)}" min="0" step="any" oninput="calculateAll()"></td>
                 <td>
                     <select class="ing-unit">
                         <option value="gr" ${item.unit === 'gr' ? 'selected' : ''}>gr</option>
@@ -1152,9 +1165,9 @@
             const costPerPcs = item.packSize > 0 ? (item.packPrice / item.packSize) : 0;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="text" class="pkg-name" value="${item.name}" placeholder="Nama kemasan"></td>
-                <td><input type="number" class="pkg-pack-price num text-right" value="${item.packPrice}" min="0" oninput="calculateAll()"></td>
-                <td><input type="number" class="pkg-pack-size num text-right" value="${item.packSize}" min="1" oninput="calculateAll()"></td>
+                <td><input type="text" class="pkg-name" value="${escHtml(item.name)}" placeholder="Nama kemasan"></td>
+                <td><input type="number" class="pkg-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()"></td>
+                <td><input type="number" class="pkg-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()"></td>
                 <td class="text-right num pkg-cost">${formatRupiah(costPerPcs)}</td>
                 <td class="no-print text-right">
                     <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
@@ -1361,7 +1374,7 @@
             const netProfitOnline = netReceived - hppPerPcs;
 
             document.getElementById('onlineResult').innerHTML = `
-                <div>Harga jual di aplikasi: <strong>${formatRupiah(finalOnline)}</strong> / ${portionUnit}</div>
+                <div>Harga jual di aplikasi: <strong>${formatRupiah(finalOnline)}</strong> / ${escHtml(portionUnit)}</div>
                 <div class="hint" style="margin-top:4px;">Potongan aplikasi: ${formatRupiah(feeDeduction)} • Uang diterima: <strong>${formatRupiah(netReceived)}</strong> • Untung bersih: <strong>${formatRupiah(netProfitOnline)}</strong></div>
             `;
         }
@@ -1385,13 +1398,13 @@
                 if (targetProfit > 0) {
                     const targetMonthlyPcs = Math.ceil((fixedMonthly + targetProfit) / profitPerPcs);
                     const targetDailyPcs = Math.ceil(targetMonthlyPcs / days);
-                    targetHtml = `<div>Target + Laba ${formatRupiah(targetProfit)}/bln: <strong>${targetMonthlyPcs} ${portionUnit}/bulan</strong> (≈ <strong>${targetDailyPcs} ${portionUnit}/hari</strong>)</div>`;
+                    targetHtml = `<div>Target + Laba ${formatRupiah(targetProfit)}/bln: <strong>${targetMonthlyPcs} ${escHtml(portionUnit)}/bulan</strong> (≈ <strong>${targetDailyPcs} ${escHtml(portionUnit)}/hari</strong>)</div>`;
                 }
 
                 bepDiv.innerHTML = `
                     <div>Minimal laku untuk tutup sewa:</div>
-                    <div>• Per Bulan: <strong>${bepMonthlyPcs} ${portionUnit}</strong> (Omzet: ${formatRupiah(bepOmzetMonthly)})</div>
-                    <div>• Per Hari (${days} hari jualan): <strong>${bepDailyPcs} ${portionUnit}/hari</strong></div>
+                    <div>• Per Bulan: <strong>${bepMonthlyPcs} ${escHtml(portionUnit)}</strong> (Omzet: ${formatRupiah(bepOmzetMonthly)})</div>
+                    <div>• Per Hari (${escHtml(String(days))} hari jualan): <strong>${bepDailyPcs} ${escHtml(portionUnit)}/hari</strong></div>
                     ${targetHtml}
                 `;
             }
@@ -1506,14 +1519,15 @@
     }
 
     function populateFormWithData(data) {
-        currentRecipeId = data.id || ('rec_' + Date.now());
-        document.getElementById('recipeName').value = data.name || 'Menu Baru';
-        document.getElementById('portionYield').value = data.portion || 1;
-        document.getElementById('portionUnit').value = data.portionUnit || 'pcs';
-        document.getElementById('operasionalPercent').value = data.operasional !== undefined ? data.operasional : 10;
-        document.getElementById('laborPercent').value = data.labor !== undefined ? data.labor : 30;
-        document.getElementById('riskPercent').value = data.risk !== undefined ? data.risk : 10;
-        document.getElementById('marginPercent').value = data.margin !== undefined ? data.margin : 50;
+        if (!data || typeof data !== 'object') return;
+        currentRecipeId = String(data.id || ('rec_' + Date.now()));
+        document.getElementById('recipeName').value = String(data.name || 'Menu Baru');
+        document.getElementById('portionYield').value = Number(data.portion) || 1;
+        document.getElementById('portionUnit').value = String(data.portionUnit || 'pcs');
+        document.getElementById('operasionalPercent').value = data.operasional !== undefined ? Number(data.operasional) : 10;
+        document.getElementById('laborPercent').value = data.labor !== undefined ? Number(data.labor) : 30;
+        document.getElementById('riskPercent').value = data.risk !== undefined ? Number(data.risk) : 10;
+        document.getElementById('marginPercent').value = data.margin !== undefined ? Number(data.margin) : 50;
         if (data.marginMode) document.getElementById('marginMode').value = data.marginMode;
         if (data.rounding) document.getElementById('roundingOption').value = data.rounding;
 
@@ -1551,7 +1565,7 @@
         let recipes = getStoredRecipes();
         if (!recipes) {
             const initial = {
-                id: 'rec_sample_gabin',
+                id: 'rec_sample_dimsum',
                 ...SAMPLE_DATA,
                 marginMode: 'margin',
                 rounding: '500',
@@ -1620,9 +1634,9 @@
         showToast('Resep dihapus');
     }
 
-    function loadGabinExample() {
+    function loadDimsumExample() {
         populateFormWithData({
-            id: 'rec_sample_gabin',
+            id: 'rec_sample_dimsum',
             ...SAMPLE_DATA,
             marginMode: 'margin',
             rounding: '500',
