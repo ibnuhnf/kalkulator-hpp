@@ -2,9 +2,43 @@
 <html lang="id" data-theme="light">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator HPP & Harga Jual Dapur UMKM</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Kalkulator HPP & Harga Jual Makanan/Minuman | Hitung Modal Dapur UMKM</title>
+    <meta name="description" content="Kalkulator HPP F&B online gratis untuk UMKM, resto, & dapur rumahan. Hitung modal bahan baku, kemasan, gas/listrik, gaji karyawan, margin laba, harga online GoFood/GrabFood, dan target BEP sewa lapak.">
+    <meta name="keywords" content="kalkulator hpp, hitung hpp makanan, kalkulator harga jual f&b, cara menghitung hpp, food cost calculator, kalkulator hpp umkm, margin laba makanan, bep sewa lapak, harga gofood grabfood">
+    <meta name="author" content="Kalkulator HPP Dapur UMKM">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Facebook / WhatsApp / Telegram preview) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kalkulator HPP & Harga Jual Dapur UMKM (Gratis)">
+    <meta property="og:description" content="Hitung akurat HPP resep makanan, biaya kemasan, overhead, margin laba, hingga simulasi komisi GoFood/GrabFood dan BEP sewa lapak.">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kalkulator HPP & Harga Jual Dapur UMKM">
+    <meta name="twitter:description" content="Kalkulator Food Cost & Margin Laba F&B Gratis untuk Pengusaha Kuliner & UMKM.">
+
+    <!-- Structured Data JSON-LD (Google Rich Snippet) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Kalkulator HPP & Harga Jual Dapur UMKM",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "description": "Aplikasi web gratis untuk menghitung HPP (Harga Pokok Produksi) kuliner, simulasi harga jual online marketplace, dan target BEP sewa lapak."
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -658,6 +692,42 @@
             line-height: 1.5;
         }
 
+        /* Ads Container */
+        .ad-slot-banner {
+            width: 100%;
+            min-height: 90px;
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-surface-subtle);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-base);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .ad-slot-sidebar {
+            width: 100%;
+            min-height: 250px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-surface-subtle);
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-base);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .ad-placeholder-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
         /* Toast */
         .toast {
             position: fixed;
@@ -1017,7 +1087,19 @@
 
                 <button class="btn btn-outline btn-sm no-print" onclick="copyWA()" type="button" style="width:100%;">Salin Ringkasan WhatsApp</button>
             </div>
+
+            <!-- Adsterra Sidebar / 300x250 Ad Slot -->
+            <div class="ad-slot-sidebar no-print">
+                <!-- PASTE KODE IKLAN ADSTERRA (300x250 Banner) DI BAWAH INI -->
+                <span class="ad-placeholder-label">Slot Iklan</span>
+            </div>
         </aside>
+    </div>
+
+    <!-- Adsterra Horizontal / 728x90 Banner Ad Slot -->
+    <div class="ad-slot-banner no-print">
+        <!-- PASTE KODE IKLAN ADSTERRA (728x90 / 468x60 Banner) DI BAWAH INI -->
+        <span class="ad-placeholder-label">Slot Iklan Banner</span>
     </div>
 
     <!-- Panduan -->
