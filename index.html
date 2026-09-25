@@ -26,20 +26,72 @@
     <meta name="twitter:title" content="Kalkulator HPP & Harga Jual Dapur UMKM">
     <meta name="twitter:description" content="Kalkulator Food Cost & Margin Laba F&B Gratis untuk Pengusaha Kuliner & UMKM.">
 
-    <!-- Structured Data JSON-LD (Google Rich Snippet) -->
+    <!-- Favicon SVG -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍳</text></svg>">
+
+    <!-- Structured Data JSON-LD (Google Rich Snippet: WebApplication + FAQPage) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Kalkulator HPP & Harga Jual Dapur UMKM",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "IDR"
-      },
-      "description": "Aplikasi web gratis untuk menghitung HPP (Harga Pokok Produksi) kuliner, simulasi harga jual online marketplace, dan target BEP sewa lapak."
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Kalkulator HPP & Harga Jual Dapur UMKM",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "IDR"
+          },
+          "description": "Aplikasi web gratis untuk menghitung HPP kuliner, simulasi harga jual marketplace, dan target BEP sewa lapak."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Apa itu HPP (Harga Pokok Produksi) dalam bisnis kuliner?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HPP (Harga Pokok Produksi) atau Food Cost adalah total biaya yang dikeluarkan untuk memproduksi satu porsi makanan atau minuman, mencakup bahan baku, kemasan, gas/listrik, upah tenaga kerja, dan cadangan risiko."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Bagaimana rumus menghitung HPP makanan yang benar?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rumus HPP Makanan = (Biaya Bahan Baku + Biaya Kemasan + Biaya Operasional Gas/Listrik + Biaya Tenaga Kerja + Biaya Risiko) dibagi Hasil Jadi (Yield/Porsi)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Apa perbedaan Margin dan Markup pada harga jual?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Margin adalah persentase keuntungan dari Harga Jual (Harga Jual = HPP / (1 - Margin%)), sedangkan Markup adalah persentase keuntungan dari Modal HPP (Harga Jual = HPP x (1 + Markup%)). Margin 50% menghasilkan harga jual lebih tinggi daripada Markup 50%."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Berapa idealnya persentase Food Cost untuk bisnis F&B?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Persentase ideal Food Cost (bahan baku + kemasan) untuk bisnis kuliner F&B berkisar antara 28% hingga 35% dari harga jual agar bisnis tetap memiliki ruang untuk biaya operasional dan laba bersih yang sehat."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Bagaimana cara menentukan harga jual di GoFood, GrabFood, dan ShopeeFood?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Harga Online = (Harga Offline + Biaya Tetap) / (1 - Persentase Komisi). Rumus ini memastikan uang bersih yang masuk ke rekening penjual setelah dipotong komisi aplikasi tetap setara dengan harga offline."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 
@@ -696,6 +748,86 @@
             line-height: 1.5;
         }
 
+        /* Article & FAQ Section */
+        .seo-section {
+            margin-top: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+        }
+        .seo-section h2 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+        .seo-section h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 18px 0 6px;
+        }
+        .seo-section p, .seo-section li {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+        .seo-section ul, .seo-section ol {
+            padding-left: 20px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+        }
+        .formula-box {
+            background: var(--bg-surface-subtle);
+            border-left: 4px solid var(--accent-brand);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            margin: 12px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+        .faq-accordion {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .faq-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-base);
+            overflow: hidden;
+            background: var(--bg-surface-subtle);
+        }
+        .faq-item summary {
+            padding: 12px 16px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--text-primary);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after {
+            content: "+";
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .faq-item[open] summary::after { content: "−"; }
+        .faq-item p {
+            padding: 0 16px 14px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
         /* Ads Container */
         .ad-slot-banner {
             width: 100%;
@@ -1144,6 +1276,53 @@
             <strong>Beda Margin dan Markup:</strong> Margin 50% berarti laba adalah setengah dari harga jual (HPP Rp10.000 dijual Rp20.000). Markup 50% berarti menambahkan 50% dari modal (HPP Rp10.000 dijual Rp15.000).
         </div>
     </section>
+
+    <!-- Edukasi Rumus & FAQ untuk SEO Google -->
+    <article class="seo-section no-print" id="edukasiHpp">
+        <h2>Panduan Lengkap Menghitung HPP & Menentukan Harga Jual Kuliner</h2>
+        <p>Banyak pengusaha kuliner (F&B) dan UMKM mengalami kerugian bukan karena sepi pembeli, melainkan karena salah menghitung <strong>Harga Pokok Produksi (HPP)</strong>. Menghitung modal makanan tidak boleh hanya menjumlahkan harga bahan mentah, tetapi wajib memasukkan biaya kemasan, gas/listrik, upah masak, dan faktor risiko penyusutan bahan.</p>
+
+        <h3>1. Rumus Menghitung HPP Makanan & Minuman</h3>
+        <p>HPP yang akurat dihitung dengan memasukkan seluruh biaya langsung dan biaya tidak langsung:</p>
+        <div class="formula-box">
+            Biaya Langsung = Total Bahan Baku + Total Kemasan<br>
+            Total HPP = Biaya Langsung + Operasional (Gas/Listrik) + Upah Tenaga Kerja + Risiko Wastage<br>
+            HPP per Porsi = Total HPP / Jumlah Hasil Jadi (Yield)
+        </div>
+
+        <h3>2. Perbedaan Menghitung Harga Jual: Margin vs Markup</h3>
+        <p>Kesalahan umum pedagang pemula adalah menyamakan margin dengan markup. Berikut perbedaannya:</p>
+        <ul>
+            <li><strong>Margin Laba:</strong> Dihitung berdasarkan persentase dari <em>Harga Jual</em>. Rumus: <code>Harga Jual = HPP / (1 - Margin%)</code>. Jika HPP Rp10.000 dan target margin 50%, harga jualnya adalah <strong>Rp20.000</strong> (untung Rp10.000 atau 50% dari harga jual).</li>
+            <li><strong>Markup:</strong> Dihitung dengan menambahkan persentase langsung di atas <em>Modal HPP</em>. Rumus: <code>Harga Jual = HPP × (1 + Markup%)</code>. Jika HPP Rp10.000 dan markup 50%, harga jualnya adalah <strong>Rp15.000</strong>.</li>
+        </ul>
+
+        <h3>3. Cara Menentukan Harga Jual di Aplikasi Online (GoFood, GrabFood, ShopeeFood)</h3>
+        <p>Aplikasi pesan antar makanan mengenakan potongan komisi rata-rata 20% + biaya transaksi tetap (Rp1.000). Agar keuntungan bersih di aplikasi sama dengan saat jualan langsung (offline), gunakan rumus penyesuaian:</p>
+        <div class="formula-box">
+            Harga Online = (Harga Jual Offline + Biaya Tetap) / (1 - % Komisi Marketplace)
+        </div>
+
+        <h3>Tanya Jawab Seputar HPP & Harga Jual (FAQ)</h3>
+        <div class="faq-accordion">
+            <details class="faq-item" open>
+                <summary>Berapa persentase Food Cost yang ideal untuk usaha kuliner?</summary>
+                <p>Secara standar industri restoran dan UMKM kuliner, persentase Food Cost (bahan baku + kemasan) yang ideal berada di kisaran <strong>28% - 35%</strong> dari harga jual. Jika food cost melebihi 40%, keuntungan bersih berisiko tergerus biaya sewa dan operasional.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Mengapa biaya kemasan (packaging) harus dihitung terpisah?</summary>
+                <p>Kemasan seperti box mika, cup minuman, plastik seal, stiker logo, dan sendok adalah biaya variabel per porsi. Banyak bisnis lupa menghitung stiker atau kantong plastik sehingga memotong margin keuntungan tanpa disadari.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Apa itu BEP (Break Even Point) dan kenapa penting bagi pedagang?</summary>
+                <p>BEP (Titik Impas) adalah jumlah porsi minimal yang harus terjual dalam sehari atau sebulan untuk menutupi seluruh biaya tetap (sewa tempat jualan, listrik bulanan, dan gaji tetap). Mengetahui BEP membuat Anda memiliki target penjualan harian yang jelas agar tidak merugi.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Apakah kalkulator HPP ini aman dan menyimpan resep saya?</summary>
+                <p>Sangat aman. Aplikasi ini berjalan 100% di browser Anda (client-side). Seluruh data resep hanya tersimpan di LocalStorage perangkat Anda dan tidak pernah dikirim ke server mana pun.</p>
+            </details>
+        </div>
+    </article>
 </div>
 
 <div class="toast" id="appToast">Ringkasan disalin</div>
