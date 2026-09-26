@@ -15,7 +15,7 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://kalkulator-hpp-indol.vercel.app/">
 
-    <!-- Open Graph (Facebook / WhatsApp / Telegram preview) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Kalkulator HPP & Harga Jual Dapur UMKM (Gratis)">
     <meta property="og:description" content="Hitung akurat HPP resep makanan, biaya kemasan, overhead, margin laba, hingga simulasi komisi GoFood/GrabFood dan BEP sewa lapak.">
@@ -29,7 +29,7 @@
     <!-- Favicon SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍳</text></svg>">
 
-    <!-- Structured Data JSON-LD (Google Rich Snippet: WebApplication + FAQPage) -->
+    <!-- Structured Data JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -95,119 +95,176 @@
     }
     </script>
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+
     <style>
+        /* ==========================================================================
+           ANTI-SLOP UI ENGINE v3.0.0 TOKENS & SYSTEM
+           Precision craftsmanship, 1px hairline borders, layered micro-shadows,
+           strict 90:10 surface-to-accent ratio, zero decorative bloat.
+           ========================================================================== */
         :root {
-            /* Palette F&B Warm Artisan */
             --bg-page: #f8fafc;
             --bg-surface: #ffffff;
             --bg-surface-subtle: #f1f5f9;
+            --bg-surface-elevated: #ffffff;
             --bg-input: #ffffff;
+            --bg-input-hover: #ffffff;
 
-            --border-color: #e2e8f0;
-            --border-hover: #cbd5e1;
+            /* 1px Hairline Solid Borders */
+            --border-subtle: #e2e8f0;
+            --border-color: #cbd5e1;
+            --border-hover: #94a3b8;
             --border-focus: #ea580c;
 
+            /* High Contrast WCAG AAA Typography */
             --text-primary: #0f172a;
-            --text-secondary: #475569;
+            --text-secondary: #334155;
             --text-muted: #64748b;
 
+            /* Single High-Contrast Accent (Terracotta Artisan) */
             --accent-brand: #ea580c;
             --accent-brand-hover: #c2410c;
-            --accent-soft: #fff7ed;
-            --accent-soft-text: #9a3412;
+            --accent-brand-active: #9a3412;
+            --accent-subtle: #fff7ed;
+            --accent-text: #9a3412;
 
+            /* Semantic System */
             --success: #15803d;
-            --success-soft: #f0fdf4;
+            --success-subtle: #f0fdf4;
+            --success-text: #14532d;
             --danger: #b91c1c;
-            --danger-soft: #fef2f2;
+            --danger-subtle: #fef2f2;
             --danger-hover: #fee2e2;
 
+            /* Hero Card Surface */
             --hero-bg: #0f172a;
+            --hero-border: #1e293b;
             --hero-text: #f8fafc;
             --hero-muted: #94a3b8;
+            --hero-profit: #4ade80;
 
+            /* Strict Proportional Radius (6px - 10px Max) */
+            --radius-xs: 4px;
             --radius-sm: 6px;
-            --radius-base: 10px;
-            --radius-card: 16px;
+            --radius-base: 8px;
+            --radius-card: 10px;
 
-            --shadow-subtle: 0 1px 3px 0 rgba(15, 23, 42, 0.05);
-            --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
-            --shadow-panel: 0 12px 28px -4px rgba(15, 23, 42, 0.08);
+            /* Layered Micro-Shadows (blur <= 6px, opacity < 6%) */
+            --shadow-subtle: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+            --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+            --shadow-panel: 0 2px 6px 0 rgba(15, 23, 42, 0.06);
+
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
         html[data-theme="dark"] {
             --bg-page: #0b0f17;
-            --bg-surface: #121824;
-            --bg-surface-subtle: #1a2232;
-            --bg-input: #172030;
+            --bg-surface: #111722;
+            --bg-surface-subtle: #172030;
+            --bg-surface-elevated: #1a2436;
+            --bg-input: #151d2c;
+            --bg-input-hover: #192334;
 
-            --border-color: #243044;
-            --border-hover: #334460;
+            --border-subtle: #1e293b;
+            --border-color: #2e3d56;
+            --border-hover: #455a7c;
             --border-focus: #f97316;
 
             --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
-            --text-muted: #64748b;
+            --text-muted: #8b9bb4;
 
             --accent-brand: #f97316;
-            --accent-brand-hover: #fb923c;
-            --accent-soft: #2e1809;
-            --accent-soft-text: #fdba74;
+            --accent-brand-hover: #ea580c;
+            --accent-brand-active: #c2410c;
+            --accent-subtle: #27170a;
+            --accent-text: #fdba74;
 
             --success: #22c55e;
-            --success-soft: #052e16;
+            --success-subtle: #052e16;
+            --success-text: #86efac;
             --danger: #ef4444;
-            --danger-soft: #450a0a;
-            --danger-hover: #7f1d1d;
+            --danger-subtle: #450a0a;
+            --danger-hover: #5c1010;
 
-            --hero-bg: #1a2232;
-            --hero-text: #ffffff;
+            --hero-bg: #151d2c;
+            --hero-border: #2e3d56;
+            --hero-text: #f8fafc;
             --hero-muted: #94a3b8;
+            --hero-profit: #4ade80;
 
-            --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-            --shadow-card: 0 4px 14px -2px rgba(0, 0, 0, 0.5);
-            --shadow-panel: 0 14px 30px -4px rgba(0, 0, 0, 0.6);
+            --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+            --shadow-panel: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
         }
 
-        * {
+        /* Base Reset */
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
             background-color: var(--bg-page);
             color: var(--text-primary);
-            min-height: 100vh;
-            padding: 24px 20px 48px;
+            font-family: var(--font-sans);
+            font-size: 13.5px;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            padding: 20px 16px 48px;
             transition: background-color 0.15s ease, color 0.15s ease;
         }
 
         .container {
-            max-width: 1160px;
+            max-width: 1140px;
             margin: 0 auto;
         }
 
-        /* Top Header */
+        /* Number Typography with Tabular Digits */
+        .num {
+            font-family: var(--font-mono);
+            font-feature-settings: "tnum" 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* ==========================================================================
+           HEADER COMPONENT
+           ========================================================================== */
         .app-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
             border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
         }
 
+        .brand-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
         .brand-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
             letter-spacing: -0.03em;
             color: var(--text-primary);
@@ -215,64 +272,83 @@
             align-items: center;
             gap: 8px;
         }
-        .brand-title span.badge-brand {
-            font-size: 12px;
+
+        .badge-brand {
+            font-size: 11px;
             font-weight: 700;
-            padding: 3px 8px;
-            border-radius: var(--radius-sm);
-            background: var(--accent-soft);
-            color: var(--accent-brand);
-            letter-spacing: 0;
+            font-family: var(--font-mono);
+            padding: 2px 7px;
+            border-radius: var(--radius-xs);
+            background: var(--accent-subtle);
+            color: var(--accent-text);
+            border: 1px solid var(--accent-brand);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
         }
 
         .brand-desc {
-            font-size: 13.5px;
+            font-size: 12.5px;
             color: var(--text-secondary);
-            margin-top: 2px;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
-        /* Buttons */
+        /* ==========================================================================
+           BUTTONS & INTERACTIVE CONTROLS (5-State Standard)
+           ========================================================================== */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
-            padding: 7px 13px;
-            border-radius: var(--radius-base);
-            font-size: 13px;
+            height: 32px;
+            padding: 0 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12.5px;
             font-weight: 600;
+            font-family: var(--font-sans);
             cursor: pointer;
             border: 1px solid transparent;
-            transition: all 0.12s ease;
+            transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease, transform 0.08s ease;
             white-space: nowrap;
             background: transparent;
             color: var(--text-primary);
             user-select: none;
+            text-decoration: none;
         }
 
         .btn:focus-visible {
             outline: 2px solid var(--border-focus);
-            outline-offset: 2px;
+            outline-offset: 1px;
         }
 
         .btn:active {
             transform: scale(0.98);
         }
 
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
         .btn-brand {
             background: var(--accent-brand);
+            border-color: var(--accent-brand);
             color: #ffffff;
-            box-shadow: 0 1px 2px rgba(234, 88, 12, 0.25);
         }
         .btn-brand:hover {
             background: var(--accent-brand-hover);
+            border-color: var(--accent-brand-hover);
+            color: #ffffff;
+        }
+        .btn-brand:active {
+            background: var(--accent-brand-active);
         }
 
         .btn-outline {
@@ -287,74 +363,97 @@
         }
 
         .btn-sm {
-            padding: 6px 11px;
-            font-size: 12.5px;
+            height: 28px;
+            padding: 0 9px;
+            font-size: 12px;
         }
 
-        /* Theme toggle */
         .theme-toggle {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 12px;
+            height: 32px;
+            padding: 0 10px;
             border: 1px solid var(--border-color);
             background: var(--bg-surface);
             color: var(--text-secondary);
-            border-radius: var(--radius-base);
+            border-radius: var(--radius-sm);
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
+            transition: all 0.12s ease;
         }
         .theme-toggle:hover {
             background: var(--bg-surface-subtle);
+            border-color: var(--border-hover);
             color: var(--text-primary);
         }
+        .theme-toggle:focus-visible {
+            outline: 2px solid var(--border-focus);
+            outline-offset: 1px;
+        }
+        .theme-toggle svg {
+            width: 14px;
+            height: 14px;
+            stroke-width: 2;
+        }
 
-        /* Recipe Bar */
+        /* ==========================================================================
+           RECIPE MANAGEMENT BAR
+           ========================================================================== */
         .recipe-bar {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
-            padding: 10px 16px;
-            margin-bottom: 20px;
+            padding: 8px 12px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow-subtle);
             flex-wrap: wrap;
         }
-        .recipe-bar label {
-            font-size: 13px;
+
+        .recipe-bar-label {
+            font-size: 12px;
             font-weight: 700;
             color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
+
         .recipe-bar select {
             min-width: 180px;
             flex: 1;
-            max-width: 320px;
+            max-width: 280px;
+            height: 30px;
             font-weight: 600;
         }
 
-        /* Workspace Grid */
+        /* ==========================================================================
+           WORKSPACE GRID LAYOUT
+           ========================================================================== */
         .workspace {
             display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 20px;
+            grid-template-columns: 1fr 330px;
+            gap: 16px;
             align-items: start;
         }
 
         .main-stack {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
-        /* Cards */
+        /* ==========================================================================
+           CARDS & SECTIONS (Anti-Slop Craftsmanship)
+           ========================================================================== */
         .card {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
-            padding: 18px 20px;
+            padding: 14px 16px;
             box-shadow: var(--shadow-card);
         }
 
@@ -363,51 +462,71 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            padding-bottom: 12px;
-            margin-bottom: 14px;
-            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
             flex-wrap: wrap;
         }
 
+        .card-title-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-index {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: var(--bg-surface-subtle);
+            border: 1px solid var(--border-subtle);
+            padding: 1px 5px;
+            border-radius: var(--radius-xs);
+        }
+
         .card-title {
-            font-size: 15px;
+            font-size: 13.5px;
             font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.01em;
         }
 
-        /* Inputs & Form */
+        /* ==========================================================================
+           FORM INPUTS & CONTROLS
+           ========================================================================== */
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 10px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
         }
 
         .form-group label {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 600;
             color: var(--text-secondary);
         }
 
         .input-inline {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
         }
 
         input, select {
             width: 100%;
-            height: 38px;
-            padding: 0 11px;
+            height: 32px;
+            padding: 0 9px;
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-base);
-            font-size: 13.5px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-family: var(--font-sans);
             color: var(--text-primary);
             background-color: var(--bg-input);
             transition: border-color 0.12s ease, box-shadow 0.12s ease;
@@ -415,57 +534,69 @@
 
         input:hover, select:hover {
             border-color: var(--border-hover);
+            background-color: var(--bg-input-hover);
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--border-focus);
-            box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+            box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.15);
         }
 
         .input-affix {
-            font-size: 12px;
+            font-family: var(--font-mono);
+            font-size: 11px;
             font-weight: 700;
             color: var(--text-muted);
             background: var(--bg-surface-subtle);
-            padding: 8px 10px;
-            border-radius: var(--radius-base);
+            height: 32px;
+            padding: 0 9px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .hint {
-            font-size: 11.5px;
+            font-size: 11px;
             color: var(--text-muted);
+            line-height: 1.4;
         }
 
-        /* Table */
+        /* ==========================================================================
+           HIGH-DENSITY DATA TABLE
+           ========================================================================== */
         .table-wrap {
             overflow-x: auto;
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-base);
-            margin-bottom: 8px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 6px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 12.5px;
             text-align: left;
         }
 
         th {
             background-color: var(--bg-surface-subtle);
             color: var(--text-secondary);
-            font-size: 11.5px;
+            font-size: 11px;
             font-weight: 700;
-            padding: 9px 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            padding: 7px 8px;
             border-bottom: 1px solid var(--border-color);
             white-space: nowrap;
         }
 
         td {
-            padding: 7px 10px;
-            border-bottom: 1px solid var(--border-color);
+            padding: 5px 6px;
+            border-bottom: 1px solid var(--border-subtle);
             vertical-align: middle;
         }
 
@@ -477,54 +608,65 @@
             background-color: var(--bg-surface-subtle);
         }
 
+        td input, td select {
+            height: 28px;
+            font-size: 12.5px;
+            padding: 0 7px;
+        }
+
         tfoot tr td {
             background-color: var(--bg-surface-subtle);
-            border-top: 2px solid var(--border-color);
-            padding: 10px 10px;
+            border-top: 1px solid var(--border-color);
+            padding: 8px 8px;
             font-weight: 700;
-        }
-
-        .num {
-            font-family: 'JetBrains Mono', monospace;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .text-right {
-            text-align: right;
+            color: var(--text-primary);
         }
 
         .btn-del {
             background: transparent;
-            border: none;
+            border: 1px solid transparent;
             color: var(--text-muted);
             cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 16px;
-            line-height: 1;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-xs);
+            font-size: 14px;
+            transition: all 0.12s ease;
         }
         .btn-del:hover {
-            background: var(--danger-hover);
+            background: var(--danger-subtle);
+            border-color: var(--danger);
             color: var(--danger);
         }
+        .btn-del:focus-visible {
+            outline: 2px solid var(--danger);
+        }
 
-        /* Option Toggles */
+        /* ==========================================================================
+           OPTION TOGGLES & EXPANDABLE PANELS
+           ========================================================================== */
         .opt-toggle-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
-            margin-top: 12px;
-            padding-top: 12px;
+            margin-top: 10px;
+            padding-top: 10px;
             border-top: 1px dashed var(--border-color);
         }
+
         .opt-toggle-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 7px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
+            gap: 6px;
+            height: 28px;
+            padding: 0 10px;
+            border-radius: var(--radius-sm);
+            font-size: 11.5px;
+            font-weight: 600;
+            font-family: var(--font-sans);
             border: 1px solid var(--border-color);
             background: var(--bg-surface);
             color: var(--text-secondary);
@@ -534,82 +676,88 @@
         .opt-toggle-btn:hover {
             border-color: var(--accent-brand);
             color: var(--accent-brand);
+            background: var(--bg-surface-subtle);
         }
         .opt-toggle-btn.on {
             background: var(--accent-brand);
             border-color: var(--accent-brand);
             color: #ffffff;
-            box-shadow: 0 2px 6px rgba(234, 88, 12, 0.25);
         }
         .opt-toggle-btn .dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--text-muted);
             flex-shrink: 0;
+            transition: background-color 0.12s ease;
         }
         .opt-toggle-btn.on .dot {
             background: #ffffff;
         }
 
         .opt-box {
-            margin-top: 12px;
+            margin-top: 10px;
             background: var(--bg-surface-subtle);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-base);
-            padding: 14px;
+            border-radius: var(--radius-sm);
+            padding: 12px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
+
         .opt-box-title {
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--text-primary);
         }
+
         .opt-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 8px;
         }
+
         .opt-result {
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            padding: 10px 12px;
-            font-size: 12.5px;
-            line-height: 1.5;
+            border-radius: var(--radius-xs);
+            padding: 8px 10px;
+            font-size: 12px;
+            line-height: 1.45;
         }
         .opt-result strong {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             color: var(--text-primary);
         }
 
-        /* Summary Panel Sticky */
+        /* ==========================================================================
+           SIDEBAR STICKY SUMMARY PANEL
+           ========================================================================== */
         .summary-panel {
             position: sticky;
-            top: 20px;
+            top: 16px;
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
-            padding: 18px;
+            padding: 14px 16px;
             box-shadow: var(--shadow-panel);
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .summary-header {
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
         }
         .summary-title {
-            font-size: 15px;
+            font-size: 13.5px;
             font-weight: 700;
             color: var(--text-primary);
         }
         .summary-subtitle {
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--text-muted);
             margin-top: 2px;
         }
@@ -618,8 +766,8 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            font-size: 13px;
+            gap: 6px;
+            font-size: 12.5px;
         }
         .summary-row {
             display: flex;
@@ -628,7 +776,7 @@
             color: var(--text-secondary);
         }
         .summary-row.total-row {
-            padding-top: 8px;
+            padding-top: 6px;
             margin-top: 2px;
             border-top: 1px dashed var(--border-color);
             font-weight: 700;
@@ -639,173 +787,184 @@
             font-weight: 700;
         }
         .summary-row.selling-row {
-            padding-top: 8px;
+            padding-top: 6px;
             margin-top: 2px;
             border-top: 1px solid var(--border-color);
             font-weight: 700;
             color: var(--accent-brand);
-            font-size: 13.5px;
+            font-size: 13px;
         }
 
+        /* Price Hero Section */
         .price-hero {
             background: var(--hero-bg);
+            border: 1px solid var(--hero-border);
             color: var(--hero-text);
-            border-radius: var(--radius-base);
-            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
         }
         .price-hero-label {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
+            font-family: var(--font-mono);
             color: var(--hero-muted);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
         .price-hero-val {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             color: #ffffff;
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
         .price-hero-profit {
             font-size: 11.5px;
             color: var(--hero-muted);
         }
         .price-hero-profit strong {
-            color: #4ade80;
+            color: var(--hero-profit);
+            font-family: var(--font-mono);
             font-weight: 700;
         }
 
-        /* Guide */
+        /* ==========================================================================
+           GUIDE & EDUCATIONAL ARTICLE SECTIONS
+           ========================================================================== */
         .guide-section {
-            margin-top: 28px;
+            margin-top: 20px;
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
-            padding: 20px;
+            padding: 16px;
             box-shadow: var(--shadow-card);
         }
         .guide-title {
-            font-size: 17px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--text-primary);
         }
         .guide-sub {
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-secondary);
             margin-top: 2px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         .guide-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
         }
         .guide-step {
             background: var(--bg-surface-subtle);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-base);
-            padding: 14px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: flex-start;
         }
         .guide-num {
             flex-shrink: 0;
-            width: 28px;
-            height: 28px;
-            border-radius: var(--radius-sm);
+            width: 24px;
+            height: 24px;
+            border-radius: var(--radius-xs);
             background: var(--accent-brand);
             color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
         }
         .guide-step h4 {
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 2px;
         }
         .guide-step p {
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--text-secondary);
-            line-height: 1.45;
-        }
-        .guide-tip {
-            margin-top: 14px;
-            background: var(--accent-soft);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-base);
-            padding: 12px 14px;
-            font-size: 12.5px;
-            color: var(--accent-soft-text);
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
-        /* Article & FAQ Section */
+        .guide-tip {
+            margin-top: 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--accent-brand);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-size: 12px;
+            color: var(--accent-text);
+            line-height: 1.45;
+        }
+
+        /* SEO Section */
         .seo-section {
-            margin-top: 24px;
+            margin-top: 16px;
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
-            padding: 24px;
+            padding: 18px 20px;
             box-shadow: var(--shadow-card);
         }
         .seo-section h2 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: -0.02em;
         }
         .seo-section h3 {
-            font-size: 15px;
+            font-size: 13.5px;
             font-weight: 700;
             color: var(--text-primary);
-            margin: 18px 0 6px;
+            margin: 14px 0 4px;
         }
         .seo-section p, .seo-section li {
-            font-size: 13.5px;
+            font-size: 13px;
             color: var(--text-secondary);
-            line-height: 1.65;
+            line-height: 1.6;
         }
         .seo-section ul, .seo-section ol {
-            padding-left: 20px;
-            margin-top: 6px;
-            margin-bottom: 12px;
+            padding-left: 18px;
+            margin-top: 4px;
+            margin-bottom: 10px;
         }
         .formula-box {
             background: var(--bg-surface-subtle);
-            border-left: 4px solid var(--accent-brand);
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            margin: 12px 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
+            border-left: 3px solid var(--accent-brand);
+            padding: 10px 14px;
+            border-radius: var(--radius-xs);
+            margin: 10px 0;
+            font-family: var(--font-mono);
+            font-size: 12px;
             color: var(--text-primary);
+            line-height: 1.6;
         }
+
         .faq-accordion {
-            margin-top: 16px;
+            margin-top: 12px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         .faq-item {
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-base);
+            border-radius: var(--radius-sm);
             overflow: hidden;
             background: var(--bg-surface-subtle);
         }
         .faq-item summary {
-            padding: 12px 16px;
+            padding: 10px 14px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             color: var(--text-primary);
             list-style: none;
@@ -817,18 +976,21 @@
         .faq-item summary::-webkit-details-marker { display: none; }
         .faq-item summary::after {
             content: "+";
-            font-size: 18px;
-            font-weight: 400;
+            font-size: 16px;
+            font-family: var(--font-mono);
+            font-weight: 600;
             color: var(--text-muted);
         }
         .faq-item[open] summary::after { content: "−"; }
         .faq-item p {
-            padding: 0 16px 14px;
-            font-size: 13px;
+            padding: 0 14px 12px;
+            font-size: 12.5px;
             color: var(--text-secondary);
         }
 
-        /* Ads Container */
+        /* ==========================================================================
+           AD CONTAINERS
+           ========================================================================== */
         .ad-slot-banner {
             width: 100%;
             min-height: 90px;
@@ -838,7 +1000,7 @@
             justify-content: center;
             background: var(--bg-surface-subtle);
             border: 1px dashed var(--border-color);
-            border-radius: var(--radius-base);
+            border-radius: var(--radius-sm);
             overflow: hidden;
             text-align: center;
         }
@@ -846,68 +1008,70 @@
         .ad-slot-sidebar {
             width: 100%;
             min-height: 250px;
-            margin-top: 12px;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: var(--bg-surface-subtle);
             border: 1px dashed var(--border-color);
-            border-radius: var(--radius-base);
+            border-radius: var(--radius-sm);
             overflow: hidden;
             text-align: center;
         }
 
         .ad-placeholder-label {
             font-size: 11px;
+            font-family: var(--font-mono);
             color: var(--text-muted);
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
-        /* Toast */
+        /* Toast Component */
         .toast {
             position: fixed;
             left: 50%;
             bottom: 24px;
             transform: translateX(-50%) translateY(70px);
             background: var(--hero-bg);
+            border: 1px solid var(--hero-border);
             color: #ffffff;
-            padding: 10px 18px;
-            border-radius: 999px;
-            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 12.5px;
             font-weight: 600;
             opacity: 0;
             pointer-events: none;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
             z-index: 99;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-panel);
         }
         .toast.show {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
 
-        /* Responsive */
+        /* Responsive Breakpoints */
         @media (max-width: 900px) {
             .workspace { grid-template-columns: 1fr; }
             .summary-panel { position: static; }
         }
 
         @media (max-width: 640px) {
-            body { padding: 14px 12px 36px; }
-            .brand-title { font-size: 20px; }
-            .app-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            body { padding: 12px 10px 36px; }
+            .brand-title { font-size: 18px; }
+            .app-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .header-actions { width: 100%; }
-            .header-actions .btn, .theme-toggle { flex: 1; justify-content: center; font-size: 12px; padding: 6px 8px; }
+            .header-actions .btn, .theme-toggle { flex: 1; justify-content: center; font-size: 11.5px; }
             .form-row { grid-template-columns: 1fr; }
-            .card { padding: 14px; }
-            th, td { font-size: 12px; padding: 6px 6px; }
+            .card { padding: 12px; }
+            th, td { font-size: 11.5px; padding: 5px 4px; }
         }
 
         @media print {
             body { background: #ffffff !important; color: #000000 !important; padding: 0; }
-            .no-print, .theme-toggle, .btn-del, .recipe-bar { display: none !important; }
-            .workspace { grid-template-columns: 1fr; gap: 14px; }
+            .no-print, .theme-toggle, .btn-del, .recipe-bar, .ad-slot-banner, .ad-slot-sidebar, .toast { display: none !important; }
+            .workspace { grid-template-columns: 1fr; gap: 12px; }
             .card, .summary-panel {
                 box-shadow: none !important;
                 border: 1px solid #cbd5e1 !important;
@@ -933,28 +1097,29 @@
 
 <div class="container">
     <header class="app-header">
-        <div>
+        <div class="brand-block">
             <div class="brand-title">
                 Kalkulator HPP Dapur
-                <span class="badge-brand">UMKM F&B</span>
+                <span class="badge-brand">UMKM F&amp;B</span>
             </div>
-            <div class="brand-desc">Hitung modal resep, kemasan, gas/listrik, tenaga kerja, dan harga jual bersih.</div>
+            <div class="brand-desc">Kalkulasi modal resep, kemasan, gas/listrik, upah tenaga kerja, dan simulasi harga jual bersih.</div>
         </div>
         <div class="header-actions">
-            <button class="theme-toggle no-print" id="themeToggleBtn" onclick="toggleTheme()" type="button" aria-label="Ganti tema">
-                <span id="themeIcon">🌙</span>
+            <button class="theme-toggle no-print" id="themeToggleBtn" onclick="toggleTheme()" type="button" aria-label="Ganti tema warna">
+                <svg id="themeIconSun" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+                <svg id="themeIconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <span id="themeLabel">Gelap</span>
             </button>
-            <a href="#panduan" class="btn btn-outline btn-sm no-print" style="text-decoration:none;">Panduan</a>
+            <a href="#panduan" class="btn btn-outline btn-sm no-print">Panduan</a>
             <button class="btn btn-outline btn-sm no-print" onclick="loadDimsumExample()" type="button">Contoh Resep</button>
             <button class="btn btn-outline btn-sm no-print" onclick="resetForm()" type="button">Reset</button>
             <button class="btn btn-brand btn-sm no-print" onclick="window.print()" type="button">Cetak</button>
         </div>
     </header>
 
-    <div class="recipe-bar no-print" role="region" aria-label="Kelola resep">
-        <label for="recipeSelect">Resep:</label>
-        <select id="recipeSelect" onchange="loadRecipeById(this.value)"></select>
+    <div class="recipe-bar no-print" role="region" aria-label="Kelola resep tersimpan">
+        <span class="recipe-bar-label">Resep:</span>
+        <select id="recipeSelect" onchange="loadRecipeById(this.value)" aria-label="Pilih resep"></select>
         <button class="btn btn-brand btn-sm" type="button" onclick="saveCurrentRecipe()">Simpan</button>
         <button class="btn btn-outline btn-sm" type="button" onclick="newRecipe()">+ Baru</button>
         <button class="btn btn-outline btn-sm" type="button" onclick="duplicateCurrentRecipe()">Duplikat</button>
@@ -963,15 +1128,18 @@
 
     <div class="workspace">
         <main class="main-stack">
-            <!-- Info Produk -->
+            <!-- 01: Info Produk -->
             <section class="card">
                 <div class="card-header">
-                    <div class="card-title">Produk & Target Yield</div>
+                    <div class="card-title-group">
+                        <span class="card-index">01</span>
+                        <div class="card-title">Produk &amp; Target Yield</div>
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label for="recipeName">Nama Menu / Produk</label>
-                        <input type="text" id="recipeName" value="Dimsum Ayam Udang" maxlength="80" placeholder="Contoh: Brownies Panggang 20x20">
+                        <input type="text" id="recipeName" value="Dimsum Ayam Udang" maxlength="80" placeholder="Contoh: Dimsum Ayam Udang">
                     </div>
                     <div class="form-group" style="flex: 1;">
                         <label for="portionYield">Hasil Jadi Sekali Masak</label>
@@ -983,10 +1151,13 @@
                 </div>
             </section>
 
-            <!-- Bahan Baku -->
+            <!-- 02: Bahan Baku -->
             <section class="card">
                 <div class="card-header">
-                    <div class="card-title">Bahan Baku (1 Resep)</div>
+                    <div class="card-title-group">
+                        <span class="card-index">02</span>
+                        <div class="card-title">Bahan Baku (1 Resep)</div>
+                    </div>
                     <button class="btn btn-brand btn-sm no-print" onclick="addIngredientRow()" type="button">+ Tambah Bahan</button>
                 </div>
 
@@ -995,7 +1166,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 32%;">Bahan</th>
-                                <th style="width: 18%;" class="text-right">Harga Beli Pack (Rp)</th>
+                                <th style="width: 18%;" class="text-right">Harga Pack (Rp)</th>
                                 <th style="width: 14%;" class="text-right">Isi Pack</th>
                                 <th style="width: 14%;" class="text-right">Pakai Resep</th>
                                 <th style="width: 9%;">Satuan</th>
@@ -1016,10 +1187,13 @@
                 <div class="hint">Biaya = (Harga Beli / Isi Pack) × Takaran Resep</div>
             </section>
 
-            <!-- Kemasan & Packaging -->
+            <!-- 03: Kemasan -->
             <section class="card">
                 <div class="card-header">
-                    <div class="card-title">Kemasan & Packaging</div>
+                    <div class="card-title-group">
+                        <span class="card-index">03</span>
+                        <div class="card-title">Kemasan &amp; Packaging</div>
+                    </div>
                     <button class="btn btn-brand btn-sm no-print" onclick="addPackagingRow()" type="button">+ Tambah Kemasan</button>
                 </div>
 
@@ -1028,7 +1202,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 42%;">Item Kemasan</th>
-                                <th style="width: 25%;" class="text-right">Harga Beli Pack (Rp)</th>
+                                <th style="width: 25%;" class="text-right">Harga Pack (Rp)</th>
                                 <th style="width: 15%;" class="text-right">Isi Pack</th>
                                 <th style="width: 18%;" class="text-right">Modal / Pcs (Rp)</th>
                                 <th style="width: 4%;" class="no-print"></th>
@@ -1042,7 +1216,7 @@
                                 <td class="no-print"></td>
                             </tr>
                             <tr>
-                                <td colspan="3">Total Kemasan 1 Resep (<span class="yieldDisplay">9</span> item)</td>
+                                <td colspan="3">Total Kemasan 1 Resep (<span class="yieldDisplay">30</span> item)</td>
                                 <td id="totalPackagingCost" class="text-right num">Rp 0</td>
                                 <td class="no-print"></td>
                             </tr>
@@ -1051,42 +1225,45 @@
                 </div>
             </section>
 
-            <!-- Biaya Tambahan & Margin -->
+            <!-- 04: Operasional & Target Laba -->
             <section class="card">
                 <div class="card-header">
-                    <div class="card-title">Operasional & Target Laba</div>
+                    <div class="card-title-group">
+                        <span class="card-index">04</span>
+                        <div class="card-title">Operasional &amp; Target Laba</div>
+                    </div>
                 </div>
 
                 <div class="form-row" style="margin-bottom: 12px;">
                     <div class="form-group">
-                        <label for="operasionalPercent">Gas, Listrik & Air</label>
+                        <label for="operasionalPercent">Gas, Listrik &amp; Air</label>
                         <div class="input-inline">
                             <input type="number" id="operasionalPercent" value="10" min="0" max="100" oninput="calculateAll()" class="num">
                             <span class="input-affix">%</span>
                         </div>
-                        <div class="hint">Acuan 5% - 15% dari Bahan + Kemasan</div>
+                        <div class="hint">5% - 15% dari Bahan + Kemasan</div>
                     </div>
 
                     <div class="form-group">
                         <label for="laborPercent">Tenaga Kerja / Masak</label>
                         <div class="input-inline">
-                            <input type="number" id="laborPercent" value="30" min="0" max="100" oninput="calculateAll()" class="num">
+                            <input type="number" id="laborPercent" value="25" min="0" max="100" oninput="calculateAll()" class="num">
                             <span class="input-affix">%</span>
                         </div>
-                        <div class="hint">Acuan 20% - 35% dari Bahan + Kemasan</div>
+                        <div class="hint">20% - 35% dari Bahan + Kemasan</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="riskPercent">Risiko Rusak / Wastage</label>
+                        <label for="riskPercent">Risiko / Wastage</label>
                         <div class="input-inline">
-                            <input type="number" id="riskPercent" value="10" min="0" max="100" oninput="calculateAll()" class="num">
+                            <input type="number" id="riskPercent" value="5" min="0" max="100" oninput="calculateAll()" class="num">
                             <span class="input-affix">%</span>
                         </div>
-                        <div class="hint">Acuan 5% - 10% dari Bahan + Kemasan</div>
+                        <div class="hint">5% - 10% dari Bahan + Kemasan</div>
                     </div>
                 </div>
 
-                <div class="form-row" style="padding-top: 12px; border-top: 1px dashed var(--border-color);">
+                <div class="form-row" style="padding-top: 10px; border-top: 1px dashed var(--border-color);">
                     <div class="form-group">
                         <label for="marginPercent">Target Laba</label>
                         <div class="input-inline">
@@ -1151,7 +1328,7 @@
                     <div class="opt-box-title">Target Penjualan untuk Tutup Sewa (BEP)</div>
                     <div class="opt-grid">
                         <div class="form-group">
-                            <label for="fixedCostMonthly">Sewa & Gaji Tetap / Bulan (Rp)</label>
+                            <label for="fixedCostMonthly">Sewa &amp; Gaji Tetap / Bulan (Rp)</label>
                             <input type="number" id="fixedCostMonthly" value="1500000" min="0" oninput="calculateAll()" class="num">
                         </div>
                         <div class="form-group">
@@ -1173,7 +1350,7 @@
             <div class="summary-panel">
                 <div class="summary-header">
                     <div class="summary-title" id="summaryRecipeTitle">Ringkasan Modal</div>
-                    <div class="summary-subtitle">Yield Resep: <span id="summaryPortionYield" class="num">9 pcs</span></div>
+                    <div class="summary-subtitle">Yield Resep: <span id="summaryPortionYield" class="num">30 pcs</span></div>
                 </div>
 
                 <ul class="summary-list">
@@ -1190,11 +1367,11 @@
                         <span class="num" id="sumOperational">Rp 0</span>
                     </li>
                     <li class="summary-row">
-                        <span>Tenaga Kerja (<span id="sumLaborPct">30</span>%)</span>
+                        <span>Tenaga Kerja (<span id="sumLaborPct">25</span>%)</span>
                         <span class="num" id="sumLabor">Rp 0</span>
                     </li>
                     <li class="summary-row">
-                        <span>Risiko (<span id="sumRiskPct">10</span>%)</span>
+                        <span>Risiko (<span id="sumRiskPct">5</span>%)</span>
                         <span class="num" id="sumRisk">Rp 0</span>
                     </li>
                     <li class="summary-row total-row">
@@ -1216,7 +1393,7 @@
                 </ul>
 
                 <div class="price-hero">
-                    <div class="price-hero-label">SARAN HARGA JUAL</div>
+                    <div class="price-hero-label">Saran Harga Jual</div>
                     <div class="price-hero-val" id="recommendedPricePerPcs">Rp 0</div>
                     <div class="price-hero-profit">Untung bersih <strong id="profitPerPcs" class="num">Rp 0</strong> / <span id="unitLabel">pcs</span></div>
                 </div>
@@ -1227,7 +1404,7 @@
             <!-- Adsterra Sidebar / 300x250 Ad Slot -->
             <div class="ad-slot-sidebar no-print">
                 <!-- PASTE KODE IKLAN ADSTERRA (300x250 Banner) DI BAWAH INI -->
-                <span class="ad-placeholder-label">Slot Iklan</span>
+                <span class="ad-placeholder-label">Slot Iklan 300x250</span>
             </div>
         </aside>
     </div>
@@ -1235,10 +1412,10 @@
     <!-- Adsterra Horizontal / 728x90 Banner Ad Slot -->
     <div class="ad-slot-banner no-print">
         <!-- PASTE KODE IKLAN ADSTERRA (728x90 / 468x60 Banner) DI BAWAH INI -->
-        <span class="ad-placeholder-label">Slot Iklan Banner</span>
+        <span class="ad-placeholder-label">Slot Iklan Banner 728x90</span>
     </div>
 
-    <!-- Panduan -->
+    <!-- Panduan Cepat -->
     <section class="guide-section no-print" id="panduan">
         <div class="guide-title">Cara Pakai</div>
         <div class="guide-sub">Alur cepat menghitung modal dan harga jual menu makanan/minuman.</div>
@@ -1246,7 +1423,7 @@
             <div class="guide-step">
                 <div class="guide-num">1</div>
                 <div>
-                    <h4>Nama Menu & Hasil Masak</h4>
+                    <h4>Nama Menu &amp; Hasil Masak</h4>
                     <p>Masukkan nama produk dan jumlah porsi/pcs yang didapat dari 1 kali proses masak.</p>
                 </div>
             </div>
@@ -1267,7 +1444,7 @@
             <div class="guide-step">
                 <div class="guide-num">4</div>
                 <div>
-                    <h4>Gas, Tenaga & Laba</h4>
+                    <h4>Gas, Tenaga &amp; Laba</h4>
                     <p>Atur persentase operasional dapur, upah masak, risiko rusak, dan target laba yang diinginkan.</p>
                 </div>
             </div>
@@ -1279,10 +1456,10 @@
 
     <!-- Edukasi Rumus & FAQ untuk SEO Google -->
     <article class="seo-section no-print" id="edukasiHpp">
-        <h2>Panduan Lengkap Menghitung HPP & Menentukan Harga Jual Kuliner</h2>
-        <p>Banyak pengusaha kuliner (F&B) dan UMKM mengalami kerugian bukan karena sepi pembeli, melainkan karena salah menghitung <strong>Harga Pokok Produksi (HPP)</strong>. Menghitung modal makanan tidak boleh hanya menjumlahkan harga bahan mentah, tetapi wajib memasukkan biaya kemasan, gas/listrik, upah masak, dan faktor risiko penyusutan bahan.</p>
+        <h2>Panduan Lengkap Menghitung HPP &amp; Menentukan Harga Jual Kuliner</h2>
+        <p>Banyak pengusaha kuliner (F&amp;B) dan UMKM mengalami kerugian bukan karena sepi pembeli, melainkan karena salah menghitung <strong>Harga Pokok Produksi (HPP)</strong>. Menghitung modal makanan tidak boleh hanya menjumlahkan harga bahan mentah, tetapi wajib memasukkan biaya kemasan, gas/listrik, upah masak, dan faktor risiko penyusutan bahan.</p>
 
-        <h3>1. Rumus Menghitung HPP Makanan & Minuman</h3>
+        <h3>1. Rumus Menghitung HPP Makanan &amp; Minuman</h3>
         <p>HPP yang akurat dihitung dengan memasukkan seluruh biaya langsung dan biaya tidak langsung:</p>
         <div class="formula-box">
             Biaya Langsung = Total Bahan Baku + Total Kemasan<br>
@@ -1303,7 +1480,7 @@
             Harga Online = (Harga Jual Offline + Biaya Tetap) / (1 - % Komisi Marketplace)
         </div>
 
-        <h3>Tanya Jawab Seputar HPP & Harga Jual (FAQ)</h3>
+        <h3>Tanya Jawab Seputar HPP &amp; Harga Jual (FAQ)</h3>
         <div class="faq-accordion">
             <details class="faq-item" open>
                 <summary>Berapa persentase Food Cost yang ideal untuk usaha kuliner?</summary>
@@ -1377,14 +1554,17 @@
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        const icon = document.getElementById('themeIcon');
+        const sun = document.getElementById('themeIconSun');
+        const moon = document.getElementById('themeIconMoon');
         const label = document.getElementById('themeLabel');
         if (theme === 'dark') {
-            icon.textContent = '☀️';
-            label.textContent = 'Terang';
+            if (sun) sun.style.display = 'block';
+            if (moon) moon.style.display = 'none';
+            if (label) label.textContent = 'Terang';
         } else {
-            icon.textContent = '🌙';
-            label.textContent = 'Gelap';
+            if (sun) sun.style.display = 'none';
+            if (moon) moon.style.display = 'block';
+            if (label) label.textContent = 'Gelap';
         }
     }
 
@@ -1400,12 +1580,12 @@
             const cost = item.packSize > 0 ? (item.packPrice / item.packSize) * item.recipeQty : 0;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="text" class="ing-name" value="${escHtml(item.name)}" maxlength="60" placeholder="Nama bahan"></td>
-                <td><input type="number" class="ing-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()"></td>
-                <td><input type="number" class="ing-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()"></td>
-                <td><input type="number" class="ing-recipe-qty num text-right" value="${escHtml(item.recipeQty)}" min="0" step="any" oninput="calculateAll()"></td>
+                <td><input type="text" class="ing-name" value="${escHtml(item.name)}" maxlength="60" placeholder="Nama bahan" aria-label="Nama bahan baku"></td>
+                <td><input type="number" class="ing-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()" aria-label="Harga beli per pack bahan"></td>
+                <td><input type="number" class="ing-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()" aria-label="Isi atau berat per pack"></td>
+                <td><input type="number" class="ing-recipe-qty num text-right" value="${escHtml(item.recipeQty)}" min="0" step="any" oninput="calculateAll()" aria-label="Jumlah takaran resep"></td>
                 <td>
-                    <select class="ing-unit">
+                    <select class="ing-unit" aria-label="Satuan bahan">
                         <option value="gr" ${item.unit === 'gr' ? 'selected' : ''}>gr</option>
                         <option value="ml" ${item.unit === 'ml' ? 'selected' : ''}>ml</option>
                         <option value="pcs" ${item.unit === 'pcs' ? 'selected' : ''}>pcs</option>
@@ -1417,7 +1597,7 @@
                 </td>
                 <td class="text-right num ing-cost">${formatRupiah(cost)}</td>
                 <td class="no-print text-right">
-                    <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+                    <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button" aria-label="Hapus baris bahan">✕</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -1431,12 +1611,12 @@
             const costPerPcs = item.packSize > 0 ? (item.packPrice / item.packSize) : 0;
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><input type="text" class="pkg-name" value="${escHtml(item.name)}" maxlength="60" placeholder="Nama kemasan"></td>
-                <td><input type="number" class="pkg-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()"></td>
-                <td><input type="number" class="pkg-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()"></td>
+                <td><input type="text" class="pkg-name" value="${escHtml(item.name)}" maxlength="60" placeholder="Nama kemasan" aria-label="Nama item kemasan"></td>
+                <td><input type="number" class="pkg-pack-price num text-right" value="${escHtml(item.packPrice)}" min="0" oninput="calculateAll()" aria-label="Harga beli per pack kemasan"></td>
+                <td><input type="number" class="pkg-pack-size num text-right" value="${escHtml(item.packSize)}" min="1" oninput="calculateAll()" aria-label="Isi per pack kemasan"></td>
                 <td class="text-right num pkg-cost">${formatRupiah(costPerPcs)}</td>
                 <td class="no-print text-right">
-                    <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+                    <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button" aria-label="Hapus baris kemasan">✕</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -1447,12 +1627,12 @@
         const tbody = document.getElementById('ingredientsBody');
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="text" class="ing-name" maxlength="60" placeholder="Nama bahan"></td>
-            <td><input type="number" class="ing-pack-price num text-right" value="0" min="0" oninput="calculateAll()"></td>
-            <td><input type="number" class="ing-pack-size num text-right" value="1" min="1" oninput="calculateAll()"></td>
-            <td><input type="number" class="ing-recipe-qty num text-right" value="0" min="0" step="any" oninput="calculateAll()"></td>
+            <td><input type="text" class="ing-name" maxlength="60" placeholder="Nama bahan" aria-label="Nama bahan baku"></td>
+            <td><input type="number" class="ing-pack-price num text-right" value="0" min="0" oninput="calculateAll()" aria-label="Harga beli per pack bahan"></td>
+            <td><input type="number" class="ing-pack-size num text-right" value="1" min="1" oninput="calculateAll()" aria-label="Isi atau berat per pack"></td>
+            <td><input type="number" class="ing-recipe-qty num text-right" value="0" min="0" step="any" oninput="calculateAll()" aria-label="Jumlah takaran resep"></td>
             <td>
-                <select class="ing-unit">
+                <select class="ing-unit" aria-label="Satuan bahan">
                     <option value="gr">gr</option>
                     <option value="ml">ml</option>
                     <option value="pcs">pcs</option>
@@ -1464,7 +1644,7 @@
             </td>
             <td class="text-right num ing-cost">Rp 0</td>
             <td class="no-print text-right">
-                <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+                <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button" aria-label="Hapus baris bahan">✕</button>
             </td>
         `;
         tbody.appendChild(tr);
@@ -1475,12 +1655,12 @@
         const tbody = document.getElementById('packagingBody');
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="text" class="pkg-name" maxlength="60" placeholder="Item kemasan"></td>
-            <td><input type="number" class="pkg-pack-price num text-right" value="0" min="0" oninput="calculateAll()"></td>
-            <td><input type="number" class="pkg-pack-size num text-right" value="1" min="1" oninput="calculateAll()"></td>
+            <td><input type="text" class="pkg-name" maxlength="60" placeholder="Item kemasan" aria-label="Nama item kemasan"></td>
+            <td><input type="number" class="pkg-pack-price num text-right" value="0" min="0" oninput="calculateAll()" aria-label="Harga beli per pack kemasan"></td>
+            <td><input type="number" class="pkg-pack-size num text-right" value="1" min="1" oninput="calculateAll()" aria-label="Isi per pack kemasan"></td>
             <td class="text-right num pkg-cost">Rp 0</td>
             <td class="no-print text-right">
-                <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button">×</button>
+                <button class="btn-del" title="Hapus baris" onclick="removeRow(this)" type="button" aria-label="Hapus baris kemasan">✕</button>
             </td>
         `;
         tbody.appendChild(tr);
@@ -1797,8 +1977,8 @@
         document.getElementById('portionYield').value = Number(data.portion) || 1;
         document.getElementById('portionUnit').value = String(data.portionUnit || 'pcs');
         document.getElementById('operasionalPercent').value = data.operasional !== undefined ? Number(data.operasional) : 10;
-        document.getElementById('laborPercent').value = data.labor !== undefined ? Number(data.labor) : 30;
-        document.getElementById('riskPercent').value = data.risk !== undefined ? Number(data.risk) : 10;
+        document.getElementById('laborPercent').value = data.labor !== undefined ? Number(data.labor) : 25;
+        document.getElementById('riskPercent').value = data.risk !== undefined ? Number(data.risk) : 5;
         document.getElementById('marginPercent').value = data.margin !== undefined ? Number(data.margin) : 50;
         if (data.marginMode) document.getElementById('marginMode').value = data.marginMode;
         if (data.rounding) document.getElementById('roundingOption').value = data.rounding;
@@ -1922,8 +2102,8 @@
         document.getElementById('portionYield').value = 1;
         document.getElementById('portionUnit').value = "pcs";
         document.getElementById('operasionalPercent').value = 10;
-        document.getElementById('laborPercent').value = 30;
-        document.getElementById('riskPercent').value = 10;
+        document.getElementById('laborPercent').value = 25;
+        document.getElementById('riskPercent').value = 5;
         document.getElementById('marginPercent').value = 50;
         renderIngredients([{ name: "", packPrice: 0, packSize: 1, recipeQty: 0, unit: "gr" }]);
         renderPackaging([{ name: "", packPrice: 0, packSize: 1 }]);
